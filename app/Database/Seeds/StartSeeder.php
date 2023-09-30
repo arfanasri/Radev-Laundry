@@ -4,6 +4,7 @@ namespace App\Database\Seeds;
 
 use App\Models\LayananModel;
 use App\Models\PelangganModel;
+use App\Models\TransaksiModel;
 use CodeIgniter\Database\Seeder;
 
 class StartSeeder extends Seeder
@@ -12,6 +13,10 @@ class StartSeeder extends Seeder
     {
         $layananModel = new LayananModel();
         $pelangganModel = new PelangganModel();
+        $transaksiModel = new TransaksiModel();
+
+        $banyakTransaksi = 5000;
+        $banyakPelanggan = 100;
 
         $dataLayanan = [
             [
@@ -73,7 +78,7 @@ class StartSeeder extends Seeder
         }
 
         $dataPelanggan = [];
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < $banyakPelanggan; $i++) {
             $faker = \Faker\Factory::create("id_ID");
             $dataPelanggan[] = [
                 "nama_pelanggan" => $faker->name(),
@@ -81,10 +86,22 @@ class StartSeeder extends Seeder
             ];
         }
 
-        $banyakPelanggan = count($dataPelanggan);
-
         foreach ($dataPelanggan as $pelanggan) {
             $pelangganModel->tambahData($pelanggan);
+        }
+
+        $dataTransaksi = [];
+        for ($i = 0; $i < $banyakTransaksi; $i++) {
+            $faker = \Faker\Factory::create("id_ID");
+            $tanggal = $faker->dateTimeBetween("-1 year");
+            $dataTransaksi[] = [
+                "tanggal_transaksi" => $tanggal->format("Y-m-d H:i:s"),
+                "id_pelanggan" => $faker->numberBetween(1, $banyakPelanggan),
+            ];
+        }
+
+        foreach ($dataTransaksi as $transaksi) {
+            $transaksiModel->tambahData($transaksi);
         }
     }
 }
