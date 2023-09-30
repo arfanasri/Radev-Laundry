@@ -10,6 +10,7 @@ class Layanan extends ResourceController
 {
 
     use ResponseTrait;
+
     /**
      * Return an array of resource objects, themselves in array format
      *
@@ -55,11 +56,11 @@ class Layanan extends ResourceController
     {
         $model = new LayananModel();
 
+        $data = $this->request->getVar();
+
         if (!$this->validate($model->validationRules)) {
             return $this->failValidationErrors($this->validator->getErrors());
         }
-
-        $data = $this->request->getJsonVar();
 
         return $this->respondCreated($model->tambahData($data));
     }
