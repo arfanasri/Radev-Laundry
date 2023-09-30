@@ -9,4 +9,5 @@ $routes->get('/', 'Home::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
     $routes->resource('layanan');
+    $routes->resource('pelanggan');
 });
