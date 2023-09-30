@@ -19,7 +19,10 @@ class Pelanggan extends ResourceController
     public function index()
     {
         $model = new PelangganModel();
-        return $this->respond($model->ambilSemua(), 200);
+
+        $respon = ['pelanggan' => $model->ambilSemua()];
+
+        return $this->respond($respon, 200);
     }
 
     /**
@@ -34,7 +37,10 @@ class Pelanggan extends ResourceController
         }
 
         $model = new PelangganModel();
-        return $this->respond($model->ambilData($id), 200);
+
+        $respon = ['pelanggan' => $model->ambilData($id)];
+
+        return $this->respond($respon, 200);
     }
 
     /**
@@ -62,7 +68,9 @@ class Pelanggan extends ResourceController
             return $this->failValidationErrors($this->validator->getErrors());
         }
 
-        return $this->respondCreated($model->tambahData($data));
+        $respon = ['pelanggan' => $model->tambahData($data)];
+
+        return $this->respondCreated($respon);
     }
 
     /**
@@ -77,7 +85,10 @@ class Pelanggan extends ResourceController
         }
 
         $model = new PelangganModel();
-        return $this->respond($model->ambilData($id), 200);
+
+        $respon = ['pelanggan' => $model->ambilData($id)];
+
+        return $this->respond($respon, 200);
     }
 
     /**
@@ -99,6 +110,8 @@ class Pelanggan extends ResourceController
 
         $data = $this->request->getJsonVar();
 
+        $respon = ['pelanggan' => $model->ubahData($id, $data)];
+
         return $this->respondUpdated($model->ubahData($id, $data));
     }
 
@@ -115,6 +128,8 @@ class Pelanggan extends ResourceController
 
         $model = new PelangganModel();
 
-        return $this->respondDeleted($model->hapusData($id));
+        $respon = ['pelanggan' => $model->hapusData($id)];
+
+        return $this->respondDeleted($respon);
     }
 }
