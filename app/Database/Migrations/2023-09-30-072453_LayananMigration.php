@@ -11,7 +11,7 @@ class LayananMigration extends Migration
         $fields = [
             'id_layanan' => [
                 'type' => 'INT',
-                'constraint' => 3,
+                'constraint' => 4,
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
