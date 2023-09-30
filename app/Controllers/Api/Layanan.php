@@ -8,7 +8,6 @@ use CodeIgniter\RESTful\ResourceController;
 
 class Layanan extends ResourceController
 {
-
     use ResponseTrait;
 
     /**
@@ -19,7 +18,10 @@ class Layanan extends ResourceController
     public function index()
     {
         $model = new LayananModel();
-        return $this->respond($model->ambilSemua(), 200);
+        $respon = [
+            "layanan" => $model->ambilSemua()
+        ];
+        return $this->respond($respon, 200);
     }
 
     /**
@@ -34,7 +36,10 @@ class Layanan extends ResourceController
         }
 
         $model = new LayananModel();
-        return $this->respond($model->ambilData($id), 200);
+        $respon = [
+            "layanan" => $model->ambilData($id),
+        ];
+        return $this->respond($respon, 200);
     }
 
     /**
@@ -62,7 +67,11 @@ class Layanan extends ResourceController
             return $this->failValidationErrors($this->validator->getErrors());
         }
 
-        return $this->respondCreated($model->tambahData($data));
+        $respon = [
+            "layanan" => $model->tambahData($data)
+        ];
+
+        return $this->respondCreated($respon);
     }
 
     /**
@@ -77,7 +86,8 @@ class Layanan extends ResourceController
         }
 
         $model = new LayananModel();
-        return $this->respond($model->ambilData($id), 200);
+        $respon = ["layanan" => $model->ambilData($id)];
+        return $this->respond($respon, 200);
     }
 
     /**
@@ -99,7 +109,9 @@ class Layanan extends ResourceController
 
         $data = $this->request->getJsonVar();
 
-        return $this->respondUpdated($model->ubahData($id, $data));
+        $respon = ["layanan" => $model->ubahData($id, $data)];
+
+        return $this->respondUpdated($respon);
     }
 
     /**
@@ -115,6 +127,8 @@ class Layanan extends ResourceController
 
         $model = new LayananModel();
 
-        return $this->respondDeleted($model->hapusData($id));
+        $respon = ["layanan" => $model->hapusData($id)];
+
+        return $this->respondDeleted($respon);
     }
 }
