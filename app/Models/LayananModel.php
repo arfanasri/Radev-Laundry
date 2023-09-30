@@ -16,5 +16,9 @@ class LayananModel extends BaseModel
     ];
 
     // Validation
-    protected $validationRules = [];
+    protected $validationRules = [
+        'nama_layanan' => 'required',
+        'harga' => 'required',
+        'satuan' => 'required',
+    ];
 }
