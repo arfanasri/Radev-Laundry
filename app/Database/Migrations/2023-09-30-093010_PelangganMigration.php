@@ -8,7 +8,6 @@ class PelangganMigration extends Migration
 {
     public function up()
     {
-
         $fields = [
             'id_pelanggan' => [
                 'type' => 'INT',
