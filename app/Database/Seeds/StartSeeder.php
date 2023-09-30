@@ -15,8 +15,8 @@ class StartSeeder extends Seeder
         $pelangganModel = new PelangganModel();
         $transaksiModel = new TransaksiModel();
 
-        $banyakTransaksi = 5000;
-        $banyakPelanggan = 100;
+        $banyakTransaksi = 500;
+        $banyakPelanggan = 20;
 
         $dataLayanan = [
             [
