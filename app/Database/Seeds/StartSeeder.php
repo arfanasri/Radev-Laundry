@@ -3,6 +3,7 @@
 namespace App\Database\Seeds;
 
 use App\Models\LayananModel;
+use App\Models\PelangganModel;
 use CodeIgniter\Database\Seeder;
 
 class StartSeeder extends Seeder
@@ -10,6 +11,7 @@ class StartSeeder extends Seeder
     public function run()
     {
         $layananModel = new LayananModel();
+        $pelangganModel = new PelangganModel();
 
         $dataLayanan = [
             [
@@ -68,6 +70,21 @@ class StartSeeder extends Seeder
 
         foreach ($dataLayanan as $layanan) {
             $layananModel->tambahData($layanan);
+        }
+
+        $dataPelanggan = [];
+        for ($i = 0; $i < 20; $i++) {
+            $faker = \Faker\Factory::create("id_ID");
+            $dataPelanggan[] = [
+                "nama_pelanggan" => $faker->name(),
+                "alamat" => $faker->address()
+            ];
+        }
+
+        $banyakPelanggan = count($dataPelanggan);
+
+        foreach ($dataPelanggan as $pelanggan) {
+            $pelangganModel->tambahData($pelanggan);
         }
     }
 }
