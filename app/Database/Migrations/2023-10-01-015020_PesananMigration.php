@@ -8,7 +8,6 @@ class PesananMigration extends Migration
 {
     public function up()
     {
-
         $fields = [
             'id_pesanan' => [
                 'type' => 'INT',
