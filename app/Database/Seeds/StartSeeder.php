@@ -4,6 +4,7 @@ namespace App\Database\Seeds;
 
 use App\Models\LayananModel;
 use App\Models\PelangganModel;
+use App\Models\PembayaranModel;
 use App\Models\PesananModel;
 use App\Models\TransaksiModel;
 use CodeIgniter\Database\Seeder;
@@ -16,6 +17,7 @@ class StartSeeder extends Seeder
         $pelangganModel = new PelangganModel();
         $transaksiModel = new TransaksiModel();
         $pesananModel = new PesananModel();
+        $pembayaranModel = new PembayaranModel();
 
         $banyakTransaksi = 500;
         $banyakPelanggan = 50;
@@ -108,6 +110,7 @@ class StartSeeder extends Seeder
             $faker = \Faker\Factory::create("id_ID");
 
             $banyakPesanan = $faker->numberBetween(1, 4);
+            $totalPembayaran = 0;
             for ($i = 0; $i < $banyakPesanan; $i++) {
                 $idLayanan = $faker->numberBetween(1, $banyakLayanan);
                 $banyak = $faker->numberBetween(1, 10);
@@ -118,8 +121,16 @@ class StartSeeder extends Seeder
                     "harga" => $dataLayanan[$idLayanan - 1]["harga"],
                     "harga_subtotal" => $dataLayanan[$idLayanan - 1]["harga"] * $banyak,
                 ];
+                $totalPembayaran += $pesanan["harga_subtotal"];
                 $pesananModel->tambahData($pesanan);
             }
+
+            $pembayaran = [
+                "id_transaksi" => $idTransaksi,
+                "banyak" => $totalPembayaran,
+                "keterangan" => "Lunas",
+            ];
+            $pembayaranModel->tambahData($pembayaran);
         }
     }
 }
