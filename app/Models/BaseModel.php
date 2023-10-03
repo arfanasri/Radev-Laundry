@@ -34,6 +34,12 @@ class BaseModel extends Model
     protected $beforeDelete = [];
     protected $afterDelete = [];
 
+    /**
+     * Ambil Semua Data dengan opsi Limit dan Offset
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
     public function ambilSemua(int|null $limit = 0, int|null $offset = 0)
     {
         return $this->findAll($limit, $offset);
