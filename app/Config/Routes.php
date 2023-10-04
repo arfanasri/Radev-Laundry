@@ -30,3 +30,5 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
     $routes->patch('pembayaran/(:segment)/(:segment)', 'Pembayaran::update/$1/$2');
     $routes->delete('pembayaran/(:segment)/(:segment)', 'Pembayaran::delete/$1/$2');
 });
+
+$routes->get("layanan", "Layanan::index", ["as" => "layanan"]);
