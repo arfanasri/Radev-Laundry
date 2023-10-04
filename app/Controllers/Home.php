@@ -2,10 +2,13 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
+class Home extends Base
 {
     public function index(): string
     {
-        return view('contoh_isi');
+        $this->setHeader("Beranda");
+        $this->setMenu("beranda");
+        $this->setBc(["Beranda"]);
+        return $this->tampil('contoh_isi', []);
     }
 }
