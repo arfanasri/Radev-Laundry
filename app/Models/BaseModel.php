@@ -45,21 +45,44 @@ class BaseModel extends Model
         return $this->findAll($limit, $offset);
     }
 
+    /**
+     * Ambil sebuah baris
+     * @param array|int|string|null $id
+     * @return array|object|null
+     */
     public function ambilData(array|int|string|null $id = null)
     {
         return $this->find($id);
     }
 
+    /**
+     * Tambah data ke Database
+     * @param array|object|null $data
+     * @param bool|null $returnID
+     * @return \CodeIgniter\Database\BaseResult|bool|int|object|string
+     */
     public function tambahData(array|object|null $data = null, bool|null $returnID = true)
     {
         return $this->insert($data, $returnID);
     }
 
+    /**
+     * Ubah data dari database
+     * @param array|int|string|null $id
+     * @param array|object|null $data
+     * @return bool
+     */
     public function ubahData(array|int|string|null $id = null, array|object|null $data = null)
     {
         return $this->update($id, $data);
     }
 
+    /**
+     * Hapus data dari database
+     * @param array|int|string|null $id
+     * @param bool|null $purge Jika SOFTDELETE aktif dan purge TRUE maka akan menghapus data didatabase
+     * @return \CodeIgniter\Database\BaseResult|bool
+     */
     public function hapusData(array|int|string|null $id, bool|null $purge = false)
     {
         return $this->delete($id, $purge);
