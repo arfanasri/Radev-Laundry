@@ -6,9 +6,9 @@ class Layanan extends Base
 {
     public function __construct()
     {
-        $this->header = "";
-        $this->menu = "";
-        $this->bc = "";
+        $this->header = "Layanan";
+        $this->menu = "layanan";
+        $this->bc = [["/", "Beranda"], "Layanan"];
     }
 
     public function index(): string
