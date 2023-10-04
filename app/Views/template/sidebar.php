@@ -2,27 +2,27 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link active" href="index.html">
+            <a class="nav-link <?= menu($menu, "beranda") ?>" href="<?= url_to("/") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Beranda
             </a>
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link <?= menu($menu, "layanan") ?>" href="<?= url_to("layanan") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                 Layanan
             </a>
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="<?= url_to("/") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Pelanggan
             </a>
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="<?= url_to("/") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Pelanggan
             </a>
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="<?= url_to("/") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Pelanggan
             </a>
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="<?= url_to("/") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Pelanggan
             </a>
