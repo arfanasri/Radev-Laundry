@@ -32,3 +32,4 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
 });
 
 $routes->get("layanan", "Layanan::index", ["as" => "layanan"]);
+$routes->post("layanan", "Layanan::data", ["as" => "layanan.data"]);
