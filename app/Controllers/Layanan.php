@@ -36,4 +36,12 @@ class Layanan extends Base
         $json = view('layanan/tambah', $data);
         return $json;
     }
+
+    public function ubah($id): string
+    {
+        $model = new LayananModel();
+        $data = ["data" => $model->ambilData($id)];
+        $json = view('layanan/ubah', $data);
+        return $json;
+    }
 }
