@@ -18,5 +18,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary" id="tombolsimpan" onclick="buatLayanan()">Simpan</button>
+    <button type="submit" class="btn btn-primary" id="tombolsimpan" onclick="createLayanan()">Simpan</button>
 </div>

@@ -19,5 +19,5 @@
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary" id="tombolsimpan"
-        onclick="perbaruiLayanan(<?= $data['id_layanan'] ?>)">Simpan</button>
+        onclick="updateLayanan(<?= $data['id_layanan'] ?>)">Simpan</button>
 </div>

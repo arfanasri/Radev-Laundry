@@ -77,7 +77,7 @@
             cancelButtonText: 'Tidak'
         }).then((result) => {
             if (result.isConfirmed) {
-                hapusLayanan(id);
+                deleteLayanan(id);
                 Swal.fire(
                     'Dihapus',
                     'Data berhasil dihapus',
@@ -87,16 +87,14 @@
         })
     }
 
-    async function buatLayanan() {
+    async function createLayanan() {
+        const onklik = sebelumSimpan();
         try {
-            sebelumSimpan();
             const data = ambilDataForm();
             const response = await axios.post('<?= url_to("api/layanan") ?>', data);
-            setelahSimpan();
             bersihkanDataForm();
             dataLayanan();
         } catch (error) {
-            setelahSimpan();
             Swal.fire({
                 position: 'top',
                 icon: 'error',
@@ -108,17 +106,16 @@
             });
             console.error(error);
         }
+        setelahSimpan(onklik);
     }
 
-    async function perbaruiLayanan(id) {
+    async function updateLayanan(id) {
+        const onklik = sebelumSimpan();
         try {
-            sebelumSimpan();
             const data = ambilDataForm();
             const response = await axios.patch('<?= url_to("api/layanan") ?>/' + id.toString(), data);
-            setelahSimpan();
             dataLayanan();
         } catch (error) {
-            setelahSimpan();
             Swal.fire({
                 position: 'top',
                 icon: 'error',
@@ -130,9 +127,10 @@
             });
             console.error(error);
         }
+        setelahSimpan(onklik);
     }
 
-    async function hapusLayanan(id) {
+    async function deleteLayanan(id) {
         try {
             const response = await axios.delete('<?= url_to("api/layanan") ?>/' + id.toString());
             dataLayanan();
@@ -161,13 +159,15 @@
     }
 
     function sebelumSimpan() {
+        const onklik = document.querySelector('#tombolsimpan').getAttribute('onclick');
         document.querySelector('#tombolsimpan').setAttribute('disable', 'disabled');
         document.querySelector('#tombolsimpan').removeAttribute('onclick');
         document.querySelector('#tombolsimpan').innerHTML = '<i class="fas fa-spin fa-spinner"></i>';
+        return onklik
     }
 
-    function setelahSimpan() {
-        document.querySelector('#tombolsimpan').setAttribute('onclick', 'buatLayanan()');
+    function setelahSimpan(onklik) {
+        document.querySelector('#tombolsimpan').setAttribute('onclick', onklik);
         document.querySelector('#tombolsimpan').removeAttribute('disable');
         document.querySelector('#tombolsimpan').innerHTML = 'Simpan';
     }
