@@ -25,7 +25,12 @@
                     <td>
                         <?= $dt['satuan'] ?>
                     </td>
-                    <td></td>
+                    <td>
+                        <button onclick="ubahLayanan(<?= $dt['id_layanan'] ?>)" class="btn btn-info btn-sm"
+                            data-bs-toggle="modal" data-bs-target="#modaltampil">Ubah</button>
+                        <button onclick="konfirmasiHapus(<?= $dt['id_layanan'] ?>)"
+                            class="btn btn-danger btn-sm">Hapus</button>
+                    </td>
                 </tr>
             <?php endforeach ?>
         </tbody>
