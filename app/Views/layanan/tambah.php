@@ -5,15 +5,15 @@
 <div class="modal-body">
     <div class="mb-3">
         <label for="nama_layanan" class="form-label">Nama Layanan</label>
-        <input type="text" class="form-control" id="nama_layanan">
+        <input type="text" class="form-control" id="nama_layanan" name="nama_layanan">
     </div>
     <div class="mb-3">
         <label for="harga" class="form-label">Harga Layanan</label>
-        <input type="number" class="form-control" id="harga">
+        <input type="number" class="form-control" id="harga" name="harga">
     </div>
     <div class="mb-3">
         <label for="satuan" class="form-label">Satuan Layanan</label>
-        <input type="text" class="form-control" id="satuan">
+        <input type="text" class="form-control" id="satuan" name="satuan">
     </div>
 </div>
 <div class="modal-footer">
