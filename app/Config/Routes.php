@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
+    $routes->get("layanan/halaman/(:segment)/(:segment)", "Layanan::page/$1/$2");
     $routes->resource('layanan');
     $routes->resource('pelanggan');
     $routes->resource('transaksi');
@@ -29,9 +30,13 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
     $routes->put('pembayaran/(:segment)/(:segment)', 'Pembayaran::update/$1/$2');
     $routes->patch('pembayaran/(:segment)/(:segment)', 'Pembayaran::update/$1/$2');
     $routes->delete('pembayaran/(:segment)/(:segment)', 'Pembayaran::delete/$1/$2');
+    // Halaman
 });
 
 $routes->get("layanan", "Layanan::index", ["as" => "layanan"]);
 $routes->post("layanan", "Layanan::data", ["as" => "layanan.data"]);
+$routes->post("layanan/halaman/(:segment)/(:segment)", "Layanan::halaman/$1/$2", ["as" => "layanan.halaman.limit"]);
+$routes->post("layanan/cari/(:segment)", "Layanan::cari/$1", ["as" => "layanan.cari"]);
+$routes->post("layanan/halaman/(:segment)", "Layanan::halaman/$1", ["as" => "layanan.halaman"]);
 $routes->post("layanan/tambah", "Layanan::tambah", ["as" => "layanan.tambah"]);
 $routes->post("layanan/ubah/(:segment)", "Layanan::ubah/$1", ["as" => "layanan.ubah"]);
