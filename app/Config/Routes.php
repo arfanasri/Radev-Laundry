@@ -10,6 +10,8 @@ $routes->get('/', 'Home::index');
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
     $routes->get("layanan/page/(:segment)/(:segment)", "Layanan::page/$1/$2");
     $routes->get("layanan/search/(:segment)", "Layanan::page/$1");
+    $routes->get("pelanggan/page/(:segment)/(:segment)", "Pelanggan::page/$1/$2");
+    $routes->get("pelanggan/search/(:segment)", "Pelanggan::page/$1");
     $routes->resource('layanan');
     $routes->resource('pelanggan');
     $routes->resource('transaksi');
@@ -34,6 +36,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
     // Halaman
 });
 
+// Layanan
 $routes->get("layanan", "Layanan::index", ["as" => "layanan"]);
 $routes->post("layanan", "Layanan::data", ["as" => "layanan.data"]);
 $routes->post("layanan/halaman/(:segment)/(:segment)", "Layanan::halaman/$1/$2", ["as" => "layanan.halaman.limit"]);
@@ -41,3 +44,12 @@ $routes->post("layanan/cari/(:segment)", "Layanan::cari/$1", ["as" => "layanan.c
 $routes->post("layanan/halaman/(:segment)", "Layanan::halaman/$1", ["as" => "layanan.halaman"]);
 $routes->post("layanan/tambah", "Layanan::tambah", ["as" => "layanan.tambah"]);
 $routes->post("layanan/ubah/(:segment)", "Layanan::ubah/$1", ["as" => "layanan.ubah"]);
+
+// Pelanggan
+$routes->get("pelanggan", "Pelanggan::index", ["as" => "pelanggan"]);
+$routes->post("pelanggan", "Pelanggan::data", ["as" => "pelanggan.data"]);
+$routes->post("pelanggan/halaman/(:segment)/(:segment)", "Pelanggan::halaman/$1/$2", ["as" => "pelanggan.halaman.limit"]);
+$routes->post("pelanggan/cari/(:segment)", "Pelanggan::cari/$1", ["as" => "pelanggan.cari"]);
+$routes->post("pelanggan/halaman/(:segment)", "Pelanggan::halaman/$1", ["as" => "pelanggan.halaman"]);
+$routes->post("pelanggan/tambah", "Pelanggan::tambah", ["as" => "pelanggan.tambah"]);
+$routes->post("pelanggan/ubah/(:segment)", "Pelanggan::ubah/$1", ["as" => "pelanggan.ubah"]);
