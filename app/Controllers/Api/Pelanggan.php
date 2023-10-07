@@ -33,13 +33,13 @@ class Pelanggan extends ResourceController
     {
         $model = new PelangganModel();
 
-        $layanan = $model
-            ->like("nama_layanan", $cari)
+        $pelanggan = $model
+            ->like("nama_pelanggan", $cari)
             ->orLike("alamat", $cari)
             ->ambilSemua();
 
         $respon = [
-            "layanan" => $layanan
+            "pelanggan" => $pelanggan
         ];
         return $this->respond($respon, 200);
     }
@@ -55,7 +55,7 @@ class Pelanggan extends ResourceController
         $limit = $tampil;
         $offset = ($laman - 1) * $limit;
         $respon = [
-            "layanan" => $model->ambilSemua($limit, $offset)
+            "pelanggan" => $model->ambilSemua($limit, $offset)
         ];
         return $this->respond($respon, 200);
     }
