@@ -2,7 +2,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>#</th>
+                <th style="width: 0%;">#</th>
                 <th>Nama Layanan</th>
                 <th>Harga</th>
                 <th>Satuan</th>
@@ -26,10 +26,12 @@
                         <?= $dt['satuan'] ?>
                     </td>
                     <td>
-                        <button onclick="ubahLayanan(<?= $dt['id_layanan'] ?>)" class="btn btn-info btn-sm"
-                            data-bs-toggle="modal" data-bs-target="#modaltampil">Ubah</button>
-                        <button onclick="konfirmasiHapus(<?= $dt['id_layanan'] ?>)"
-                            class="btn btn-danger btn-sm">Hapus</button>
+                        <div class="btn-group">
+                            <button onclick="ubahLayanan(<?= $dt['id_layanan'] ?>)" class="btn btn-info btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#modaltampil">Ubah</button>
+                            <button onclick="konfirmasiHapus(<?= $dt['id_layanan'] ?>)"
+                                class="btn btn-danger btn-sm">Hapus</button>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach ?>
