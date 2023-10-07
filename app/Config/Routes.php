@@ -9,9 +9,11 @@ $routes->get('/', 'Home::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
     $routes->get("layanan/page/(:segment)/(:segment)", "Layanan::page/$1/$2");
-    $routes->get("layanan/search/(:segment)", "Layanan::page/$1");
+    $routes->get("layanan/search/(:segment)", "Layanan::search/$1");
     $routes->get("pelanggan/page/(:segment)/(:segment)", "Pelanggan::page/$1/$2");
-    $routes->get("pelanggan/search/(:segment)", "Pelanggan::page/$1");
+    $routes->get("pelanggan/search/(:segment)", "Pelanggan::search/$1");
+    $routes->get("transaksi/page/(:segment)/(:segment)", "Transaksi::page/$1/$2");
+    $routes->get("transaksi/search/(:segment)", "Transaksi::search/$1");
     $routes->resource('layanan');
     $routes->resource('pelanggan');
     $routes->resource('transaksi');

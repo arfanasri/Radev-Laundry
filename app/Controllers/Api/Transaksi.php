@@ -25,6 +25,44 @@ class Transaksi extends ResourceController
     }
 
     /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function search($cari)
+    {
+        $model = new TransaksiModel();
+
+        $transaksi = $model
+            ->like("transaksi.id_transaksi", $cari)
+            ->orLike("pelanggan.nama_pelanggan", $cari)
+            ->orLike("transaksi.tanggal_transaksi", $cari)
+            ->orLike("transaksi.harga_total", $cari)
+            ->ambilSemua();
+
+        $respon = [
+            "transaksi" => $transaksi
+        ];
+        return $this->respond($respon, 200);
+    }
+
+    /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function page($laman, $tampil = 50)
+    {
+        $model = new TransaksiModel();
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+        $respon = [
+            "transaksi" => $model->ambilSemua($limit, $offset)
+        ];
+        return $this->respond($respon, 200);
+    }
+
+    /**
      * Return the properties of a resource object
      *
      * @return mixed
