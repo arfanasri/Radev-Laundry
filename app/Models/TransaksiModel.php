@@ -61,21 +61,20 @@ class TransaksiModel extends BaseModel
 
     public function ambilSemua($limit = 0, $offset = 0)
     {
-        $builder = $this->builder();
-        $builder->select("transaksi.*, pelanggan.nama_pelanggan");
-        $builder->join("pelanggan", "pelanggan.id_pelanggan = transaksi.id_pelanggan", "LEFT");
-        $builder->where("transaksi." . $this->deletedField);
-        $builder->orderBy("transaksi.id_transaksi", "DESC");
-        return $builder->get()->getResult();
+        return $this->select("transaksi.*, pelanggan.nama_pelanggan")
+            ->join("pelanggan", "pelanggan.id_pelanggan = transaksi.id_pelanggan", "LEFT")
+            ->where("transaksi." . $this->deletedField)
+            ->orderBy("transaksi.id_transaksi", "DESC")
+            ->findAll($limit, $offset);
     }
 
     public function ambilData($id = null)
     {
-        $builder = $this->builder();
-        $builder->select("transaksi.*, pelanggan.nama_pelanggan");
-        $builder->join("pelanggan", "pelanggan.id_pelanggan = transaksi.id_pelanggan", "LEFT");
-        $builder->where("transaksi." . $this->deletedField);
-        $builder->where("transaksi.id_transaksi", $id);
-        return $builder->get()->getRow();
+        return $this->select("transaksi.*, pelanggan.nama_pelanggan")
+            ->join("pelanggan", "pelanggan.id_pelanggan = transaksi.id_pelanggan", "LEFT")
+            ->where("transaksi." . $this->deletedField)
+            ->where("transaksi.id_transaksi", $id)
+            ->first();
+
     }
 }
