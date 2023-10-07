@@ -25,6 +25,43 @@ class Layanan extends ResourceController
     }
 
     /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function search($cari)
+    {
+        $model = new LayananModel();
+
+        $layanan = $model
+            ->like("nama_layanan", $cari)
+            ->orLike("harga", $cari)
+            ->orLike("satuan", $cari)
+            ->ambilSemua();
+
+        $respon = [
+            "layanan" => $layanan
+        ];
+        return $this->respond($respon, 200);
+    }
+
+    /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function page($laman, $tampil = 50)
+    {
+        $model = new LayananModel();
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+        $respon = [
+            "layanan" => $model->ambilSemua($limit, $offset)
+        ];
+        return $this->respond($respon, 200);
+    }
+
+    /**
      * Return the properties of a resource object
      *
      * @return mixed
