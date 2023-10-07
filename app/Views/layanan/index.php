@@ -141,6 +141,15 @@
             const response = await axios.post('<?= url_to("api/layanan") ?>', data);
             bersihkanDataForm();
             dataLayanan(HALAMAN_SEKARANG);
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Data berhasil disimpan',
+                showConfirmButton: false,
+                timer: 5000,
+                toast: true,
+            });
         } catch (error) {
             Swal.fire({
                 position: 'top',
@@ -162,6 +171,15 @@
             const data = ambilDataForm();
             const response = await axios.patch('<?= url_to("api/layanan") ?>/' + id.toString(), data);
             dataLayanan(HALAMAN_SEKARANG);
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Data berhasil disimpan',
+                showConfirmButton: false,
+                timer: 5000,
+                toast: true,
+            });
         } catch (error) {
             Swal.fire({
                 position: 'top',
