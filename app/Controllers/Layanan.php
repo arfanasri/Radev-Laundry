@@ -15,7 +15,11 @@ class Layanan extends Base
 
     public function index(): string
     {
-        return $this->tampil("layanan/index", []);
+        $model = new LayananModel();
+        $banyakData = $model->countAllResults();
+        $banyakHalaman = ceil($banyakData / 50);
+        $data = ["banyakHalaman" => $banyakHalaman];
+        return $this->tampil("layanan/index", $data);
     }
 
     public function data(): string
@@ -24,6 +28,38 @@ class Layanan extends Base
 
         $data = [
             "layanan" => $model->ambilSemua(),
+        ];
+
+        $json = view('layanan/data', $data);
+        return $json;
+    }
+
+    public function cari($cari): string
+    {
+        $model = new LayananModel();
+        $layanan = $model
+            ->like("nama_layanan", $cari)
+            ->orLike("harga", $cari)
+            ->orLike("satuan", $cari)
+            ->ambilSemua();
+
+        $data = [
+            "layanan" => $layanan,
+        ];
+
+        $json = view('layanan/data', $data);
+        return $json;
+    }
+
+    public function halaman($laman, $tampil = 50): string
+    {
+        $model = new LayananModel();
+
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+
+        $data = [
+            "layanan" => $model->ambilSemua($limit, $offset),
         ];
 
         $json = view('layanan/data', $data);
