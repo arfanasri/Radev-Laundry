@@ -46,6 +46,7 @@ class TransaksiModel extends BaseModel
 
     public function tambahData($data = null, $returnID = true)
     {
+        $data = (array) $data;
         if (isset($data["tanggal_transaksi"])) {
             $idTransaksi = $this->idTransaksiBaru($data["tanggal_transaksi"]);
         } else {
