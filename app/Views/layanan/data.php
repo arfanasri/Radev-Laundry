@@ -10,7 +10,13 @@
             </tr>
         </thead>
         <tbody>
-            <?php $no = 1 ?>
+            <?php
+            if (isset($halaman)) {
+                $no = $offset + 1;
+            } else {
+                $no = 1;
+            }
+            ?>
             <?php foreach ($layanan as $dt): ?>
                 <tr>
                     <td>

@@ -147,7 +147,7 @@
                 title: 'Berhasil',
                 text: 'Data berhasil disimpan',
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 3000,
                 toast: true,
             });
         } catch (error) {
@@ -177,7 +177,7 @@
                 title: 'Berhasil',
                 text: 'Data berhasil disimpan',
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 3000,
                 toast: true,
             });
         } catch (error) {

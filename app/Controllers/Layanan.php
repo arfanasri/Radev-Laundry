@@ -60,6 +60,8 @@ class Layanan extends Base
 
         $data = [
             "layanan" => $model->ambilSemua($limit, $offset),
+            "halaman" => $laman,
+            "offset" => $offset,
         ];
 
         $json = view('layanan/data', $data);
