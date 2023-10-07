@@ -62,6 +62,7 @@
 <?= $this->section("js") ?>
 <script>
     var HALAMAN_SEKARANG = 1;
+    var DATA_SEKARANG = 1; // 1 : Halaman, 2 : Cari
 
     function ready(callback) {
         if (document.readyState != 'loading') callback();
@@ -76,6 +77,7 @@
             const response = await axios.post('<?= site_url("pelanggan/halaman") ?>/' + halaman.toString());
             document.querySelector("#tampildata").innerHTML = response.data;
             HALAMAN_SEKARANG = halaman;
+            DATA_SEKARANG = 1;
         } catch (error) {
             console.error(error);
         }
@@ -84,10 +86,12 @@
     async function cariPelanggan(cari) {
         if (cari == "") {
             dataPelanggan(1);
+            DATA_SEKARANG = 1;
         } else {
             try {
                 const response = await axios.post('<?= site_url("pelanggan/cari") ?>/' + cari.toString());
                 document.querySelector("#tampildata").innerHTML = response.data;
+                DATA_SEKARANG = 2;
             } catch (error) {
                 console.error(error);
             }
@@ -140,7 +144,7 @@
             const data = ambilDataForm();
             const response = await axios.post('<?= url_to("api/pelanggan") ?>', data);
             bersihkanDataForm();
-            dataPelanggan(HALAMAN_SEKARANG);
+            perubahanData();
             Swal.fire({
                 position: 'top',
                 icon: 'success',
@@ -170,7 +174,7 @@
         try {
             const data = ambilDataForm();
             const response = await axios.patch('<?= url_to("api/pelanggan") ?>/' + id.toString(), data);
-            dataPelanggan(HALAMAN_SEKARANG);
+            perubahanData();
             Swal.fire({
                 position: 'top',
                 icon: 'success',
@@ -198,7 +202,7 @@
     async function deletePelanggan(id) {
         try {
             const response = await axios.delete('<?= url_to("api/pelanggan") ?>/' + id.toString());
-            dataPelanggan(HALAMAN_SEKARANG);
+            perubahanData();
         } catch (error) {
             console.error(error);
         }
@@ -208,6 +212,15 @@
         const cari = document.querySelector("#cari").value;
         cariPelanggan(cari);
     }
+
+    function perubahanData() {
+        if (DATA_SEKARANG == 1) {
+            dataPelanggan(HALAMAN_SEKARANG);
+        } else if (DATA_SEKARANG == 2) {
+            tombolCari();
+        }
+    }
+
 
     function ambilDataForm() {
         nama_pelanggan = document.querySelector("#nama_pelanggan").value;
