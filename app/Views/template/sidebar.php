@@ -10,7 +10,7 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                 Layanan
             </a>
-            <a class="nav-link" href="<?= url_to("/") ?>">
+            <a class="nav-link <?= menu($menu, "pelanggan") ?>" href="<?= url_to("pelanggan") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Pelanggan
             </a>
