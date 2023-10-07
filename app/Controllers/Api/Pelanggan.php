@@ -8,7 +8,6 @@ use CodeIgniter\RESTful\ResourceController;
 
 class Pelanggan extends ResourceController
 {
-
     use ResponseTrait;
 
     /**
@@ -22,6 +21,42 @@ class Pelanggan extends ResourceController
 
         $respon = ['pelanggan' => $model->ambilSemua()];
 
+        return $this->respond($respon, 200);
+    }
+
+    /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function search($cari)
+    {
+        $model = new PelangganModel();
+
+        $layanan = $model
+            ->like("nama_layanan", $cari)
+            ->orLike("alamat", $cari)
+            ->ambilSemua();
+
+        $respon = [
+            "layanan" => $layanan
+        ];
+        return $this->respond($respon, 200);
+    }
+
+    /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function page($laman, $tampil = 50)
+    {
+        $model = new PelangganModel();
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+        $respon = [
+            "layanan" => $model->ambilSemua($limit, $offset)
+        ];
         return $this->respond($respon, 200);
     }
 
