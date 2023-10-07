@@ -2,17 +2,47 @@
 
 <?= $this->section("main") ?>
 <div class="card">
-    <div class="card-header">Data Layanan
-
-        <!-- Button trigger modal -->
-        <div class="float-end">
-            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modaltampil"
-                onclick="tambahLayanan()">
-                Tambah
-            </button>
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-4 pb-2">
+                Data Layanan
+            </div>
+            <div class="col-md-6 pb-2">
+                <div class="row">
+                    <label for="cari" class="col-sm-2 col-form-label">Cari :</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="cari" placeholder="Cari"
+                            onchange="cariLayanan(this.value)">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 d-grid gap-2 pb-2">
+                <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modaltampil" onclick="tambahLayanan()">
+                    Tambah
+                </button>
+            </div>
         </div>
     </div>
     <div class="card-body" id="tampildata">
+    </div>
+    <div class="card-footer d-flex justify-content-center">
+        <nav>
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $banyakHalaman; $i++): ?>
+                    <?php if ($i == 1): ?>
+                        <li class="page-item active" onclick="dataLayanan(<?= $i ?>);setAktif(event)"><button class="page-link">
+                                <?= $i ?>
+                            </button>
+                        </li>
+                    <?php else: ?>
+                        <li class="page-item" onclick="dataLayanan(<?= $i ?>);setAktif(event)"><button class="page-link">
+                                <?= $i ?>
+                            </button></li>
+                    <?php endif ?>
+                <?php endfor ?>
+            </ul>
+        </nav>
     </div>
 </div>
 
@@ -30,6 +60,8 @@
 
 <?= $this->section("js") ?>
 <script>
+    var HALAMAN_SEKARANG = 1;
+
     function ready(callback) {
         if (document.readyState != 'loading') callback();
         else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
@@ -38,12 +70,27 @@
         })
     };
 
-    async function dataLayanan() {
+    async function dataLayanan(halaman) {
         try {
-            const response = await axios.post('<?= url_to("layanan.data") ?>');
+            const response = await axios.post('<?= site_url("layanan/halaman") ?>/' + halaman.toString());
             document.querySelector("#tampildata").innerHTML = response.data;
+            HALAMAN_SEKARANG = halaman;
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    async function cariLayanan(cari) {
+        console.log(cari);
+        if (cari == "") {
+            dataLayanan(1);
+        } else {
+            try {
+                const response = await axios.post('<?= site_url("layanan/cari") ?>/' + cari.toString());
+                document.querySelector("#tampildata").innerHTML = response.data;
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 
@@ -93,7 +140,7 @@
             const data = ambilDataForm();
             const response = await axios.post('<?= url_to("api/layanan") ?>', data);
             bersihkanDataForm();
-            dataLayanan();
+            dataLayanan(HALAMAN_SEKARANG);
         } catch (error) {
             Swal.fire({
                 position: 'top',
@@ -114,7 +161,7 @@
         try {
             const data = ambilDataForm();
             const response = await axios.patch('<?= url_to("api/layanan") ?>/' + id.toString(), data);
-            dataLayanan();
+            dataLayanan(HALAMAN_SEKARANG);
         } catch (error) {
             Swal.fire({
                 position: 'top',
@@ -133,10 +180,15 @@
     async function deleteLayanan(id) {
         try {
             const response = await axios.delete('<?= url_to("api/layanan") ?>/' + id.toString());
-            dataLayanan();
+            dataLayanan(HALAMAN_SEKARANG);
         } catch (error) {
             console.error(error);
         }
+    }
+
+    function tombolCari() {
+        const cari = document.querySelector("#cari").value;
+        cariLayanan(cari);
     }
 
     function ambilDataForm() {
@@ -158,6 +210,12 @@
         document.querySelector("#satuan").value = "";
     }
 
+    ready(function () {
+        dataLayanan(HALAMAN_SEKARANG);
+    })
+
+    // Global Function yang akan dipindahkan dalam 1 file nanti
+
     function sebelumSimpan() {
         const onklik = document.querySelector('#tombolsimpan').getAttribute('onclick');
         document.querySelector('#tombolsimpan').setAttribute('disable', 'disabled');
@@ -172,11 +230,15 @@
         document.querySelector('#tombolsimpan').innerHTML = 'Simpan';
     }
 
-    ready(function () {
-        dataLayanan();
-    })
+    function setAktif(e) {
+        const klass = document.getElementsByClassName(e.currentTarget.className);
 
+        for (i = 0; i < klass.length; i++) {
+            klass[i].setAttribute("class", "page-item");
+        }
 
+        e.currentTarget.setAttribute("class", "page-item active");
+    }
 
 </script>
 <?= $this->endSection() ?>
