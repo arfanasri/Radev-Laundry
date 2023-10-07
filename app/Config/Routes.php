@@ -8,7 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
-    $routes->get("layanan/halaman/(:segment)/(:segment)", "Layanan::page/$1/$2");
+    $routes->get("layanan/page/(:segment)/(:segment)", "Layanan::page/$1/$2");
+    $routes->get("layanan/search/(:segment)", "Layanan::page/$1");
     $routes->resource('layanan');
     $routes->resource('pelanggan');
     $routes->resource('transaksi');
