@@ -25,4 +25,19 @@ class PesananModel extends BaseModel
         'harga' => 'required',
         'harga_subtotal' => 'required',
     ];
+
+    public function ambilSemua($limit = 0, $offset = 0)
+    {
+        return $this->select("pesanan.*, layanan.nama_layanan")
+            ->join("layanan", "pesanan.id_layanan = layanan.id_layanan", "LEFT")
+            ->findAll($limit, $offset);
+    }
+
+    public function ambilData($id = null)
+    {
+        return $this->select("pesanan.*, layanan.nama_layanan")
+            ->join("layanan", "pesanan.id_layanan = layanan.id_layanan", "LEFT")
+            ->where("pesanan.id_pesanan", $id)
+            ->first();
+    }
 }
