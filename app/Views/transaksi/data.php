@@ -41,7 +41,7 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-success btn-sm">Lihat</a>
+                            <a class="btn btn-success btn-sm" href="<?= url_to("pesanan", $dt["id_transaksi"]) ?>">Lihat</a>
                             <button onclick="konfirmasiHapus(<?= $dt['id_transaksi'] ?>)"
                                 class="btn btn-danger btn-sm">Hapus</button>
                         </div>
