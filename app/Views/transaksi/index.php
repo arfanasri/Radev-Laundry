@@ -61,8 +61,12 @@
 
 <?= $this->section("js") ?>
 <script>
+    // Inisialisasi
     var HALAMAN_SEKARANG = 1;
     var DATA_SEKARANG = 1; // 1 : Halaman, 2 : Cari
+
+    const modalElement = document.getElementById("modaltampil");
+    const modal = new bootstrap.Modal(modalElement);
 
     function ready(callback) {
         if (document.readyState != 'loading') callback();
@@ -134,16 +138,13 @@
         try {
             const data = ambilDataForm();
             const response = await axios.post('<?= url_to("api/transaksi") ?>', data);
-            bersihkanDataForm();
+            modal.toggle();
             perubahanData();
             Swal.fire({
-                position: 'top',
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Data berhasil disimpan',
-                showConfirmButton: false,
                 timer: 3000,
-                toast: true,
             });
         } catch (error) {
             console.error(error);
@@ -190,10 +191,6 @@
         }
 
         return dataForm;
-    }
-
-    function bersihkanDataForm() {
-        document.querySelector("#id_pelanggan").value = "";
     }
 
     ready(function () {

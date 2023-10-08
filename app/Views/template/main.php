@@ -16,7 +16,7 @@
     <?= $this->renderSection("css") ?>
 </head>
 
-<body class="sb-nav-fixed">
+<body id="body" class="sb-nav-fixed">
     <?= $this->include("template/navbar") ?>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">

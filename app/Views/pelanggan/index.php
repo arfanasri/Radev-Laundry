@@ -61,8 +61,12 @@
 
 <?= $this->section("js") ?>
 <script>
+    // Inisialisasi
     var HALAMAN_SEKARANG = 1;
     var DATA_SEKARANG = 1; // 1 : Halaman, 2 : Cari
+
+    const modalElement = document.getElementById("modaltampil");
+    const modal = new bootstrap.Modal(modalElement);
 
     function ready(callback) {
         if (document.readyState != 'loading') callback();
@@ -143,16 +147,13 @@
         try {
             const data = ambilDataForm();
             const response = await axios.post('<?= url_to("api/pelanggan") ?>', data);
-            bersihkanDataForm();
             perubahanData();
+            modal.toggle();
             Swal.fire({
-                position: 'top',
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Data berhasil disimpan',
-                showConfirmButton: false,
                 timer: 3000,
-                toast: true,
             });
         } catch (error) {
             console.error(error);
@@ -175,14 +176,12 @@
             const data = ambilDataForm();
             const response = await axios.patch('<?= url_to("api/pelanggan") ?>/' + id.toString(), data);
             perubahanData();
+            modal.toggle();
             Swal.fire({
-                position: 'top',
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Data berhasil disimpan',
-                showConfirmButton: false,
                 timer: 3000,
-                toast: true,
             });
         } catch (error) {
             Swal.fire({
@@ -233,11 +232,6 @@
         return dataForm;
     }
 
-    function bersihkanDataForm() {
-        document.querySelector("#nama_pelanggan").value = "";
-        document.querySelector("#alamat").value = "";
-    }
-
     ready(function () {
         dataPelanggan(HALAMAN_SEKARANG);
     })
@@ -267,6 +261,5 @@
 
         e.currentTarget.setAttribute("class", "page-item active");
     }
-
 </script>
 <?= $this->endSection() ?>

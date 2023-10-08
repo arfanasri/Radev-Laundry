@@ -63,8 +63,12 @@
 
 <?= $this->section("js") ?>
 <script>
+    // Inisialisasi
     var DATA_SEKARANG_LAYANAN = 1; // 1 : Halaman, 2 : Cari
     var DATA_SEKARANG_PESANAN = 1; // 1 : Halaman, 2 : Cari
+
+    const modalElement = document.getElementById("modaltampil");
+    const modal = new bootstrap.Modal(modalElement);
 
     function ready(callback) {
         if (document.readyState != 'loading') callback();
@@ -169,16 +173,13 @@
         try {
             const data = ambilDataForm();
             const response = await axios.post('<?= site_url("api/pesanan/$idTransaksi") ?>', data);
-            bersihkanDataForm();
+            modal.toggle()
             perubahanData();
             Swal.fire({
-                position: 'top',
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Data berhasil disimpan',
-                showConfirmButton: false,
                 timer: 3000,
-                toast: true,
             });
         } catch (error) {
             console.error(error);
@@ -202,15 +203,13 @@
             const response = await axios.patch('<?= site_url("api/pesanan/$idTransaksi") ?>/' + id.toString(), data);
             perubahanData();
             Swal.fire({
-                position: 'top',
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Data berhasil disimpan',
-                showConfirmButton: false,
                 timer: 3000,
-                toast: true,
             });
         } catch (error) {
+            console.error(error);
             Swal.fire({
                 position: 'top',
                 icon: 'error',
@@ -220,7 +219,6 @@
                 timer: 5000,
                 toast: true,
             });
-            console.error(error);
         }
         setelahSimpan(onklik);
     }
@@ -263,14 +261,6 @@
         }
 
         return dataForm;
-    }
-
-    function bersihkanDataForm() {
-        document.querySelector("#id_transaksi").value = "";
-        document.querySelector("#id_layanan").value = "";
-        document.querySelector("#banyak").value = "";
-        document.querySelector("#harga").value = "";
-        document.querySelector("#harga_subtotal").value = "";
     }
 
     ready(function () {
