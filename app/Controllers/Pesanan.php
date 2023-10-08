@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\LayananModel;
 use App\Models\PesananModel;
 
-class Pelanggan extends Base
+class Pesanan extends Base
 {
     public function __construct()
     {
@@ -16,6 +16,8 @@ class Pelanggan extends Base
 
     public function transaksi($idTransaksi): string
     {
+        $this->setBc([["/", "Beranda"], ["transaksi", "Transaksi"], $idTransaksi]);
+        $this->setHeader("Transaksi " . $idTransaksi);
         $data = ["idTransaksi" => $idTransaksi];
         return $this->tampil("pesanan/index", $data);
     }
@@ -40,15 +42,16 @@ class Pelanggan extends Base
             "layanan" => $layananModel->ambilSemua(),
         ];
 
-        $json = view('pelanggan/data_layanan', $data);
+        $json = view('pesanan/data_layanan', $data);
         return $json;
     }
 
-    public function cari($cari): string
+    public function cari($idTransaksi, $cari): string
     {
         $model = new PesananModel();
         $pesanan = $model
             ->like("layanan.nama_layanan", $cari)
+            ->like("layanan.id_transaksi", $idTransaksi)
             ->ambilSemua();
 
         $data = [
@@ -74,11 +77,12 @@ class Pelanggan extends Base
         return $json;
     }
 
-    public function tambah($idLayanan): string
+    public function tambah($idTransaksi, $idLayanan): string
     {
         $layananModel = new LayananModel();
         $data = [
-            "layanan" => $layananModel->ambilData($idLayanan)
+            "layanan" => $layananModel->ambilData($idLayanan),
+            "idTransaksi" => $idTransaksi,
         ];
         $json = view('pesanan/tambah', $data);
         return $json;
