@@ -40,4 +40,53 @@ class PesananModel extends BaseModel
             ->where("pesanan.id_pesanan", $id)
             ->first();
     }
+
+    public function tambahData($data = null, $returnID = true)
+    {
+        $data = (array) $data;
+        $idTransaksi = $data["id_transaksi"];
+        $semuaPesanan = $this->where("id_transaksi", $idTransaksi)->ambilSemua();
+        $total = $data["harga_subtotal"];
+        foreach ($semuaPesanan as $dt) {
+            $total += $dt["harga_subtotal"];
+        }
+        $transaksiModel = new TransaksiModel();
+        $dataTransaksi = [
+            "harga_total" => $total,
+        ];
+        $transaksiModel->ubahData($idTransaksi, $dataTransaksi);
+        return $this->insert($data, $returnID);
+    }
+
+    public function ubahData($id = null, $data = null)
+    {
+        $data = (array) $data;
+        $idTransaksi = $data["id_transaksi"];
+        $semuaPesanan = $this->where("id_transaksi", $idTransaksi)->ambilSemua();
+        $total = $data["harga_subtotal"];
+        foreach ($semuaPesanan as $dt) {
+            if ($dt["id_pesanan"] != $id) {
+                $total += $dt["harga_subtotal"];
+            }
+        }
+        $transaksiModel = new TransaksiModel();
+        $dataTransaksi = [
+            "harga_total" => $total,
+        ];
+        $transaksiModel->ubahData($idTransaksi, $dataTransaksi);
+        return $this->update($id, $data);
+    }
+
+    public function hapusData($id, $purge = false)
+    {
+        $pesanan = $this->ambilData($id);
+        $transaksiModel = new TransaksiModel();
+        $idTransaksi = $pesanan["id_transaksi"];
+        $transaksi = $transaksiModel->ambilData($idTransaksi);
+        $dataTransaksi = [
+            "harga_total" => $transaksi["harga_total"] - $pesanan["harga_subtotal"],
+        ];
+        $transaksiModel->ubahData($idTransaksi, $dataTransaksi);
+        return $this->delete($id, $purge);
+    }
 }
