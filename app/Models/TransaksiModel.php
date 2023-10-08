@@ -64,7 +64,6 @@ class TransaksiModel extends BaseModel
     {
         return $this->select("transaksi.*, pelanggan.nama_pelanggan")
             ->join("pelanggan", "pelanggan.id_pelanggan = transaksi.id_pelanggan", "LEFT")
-            ->where("transaksi." . $this->deletedField)
             ->orderBy("transaksi.id_transaksi", "DESC")
             ->findAll($limit, $offset);
     }
@@ -73,7 +72,6 @@ class TransaksiModel extends BaseModel
     {
         return $this->select("transaksi.*, pelanggan.nama_pelanggan")
             ->join("pelanggan", "pelanggan.id_pelanggan = transaksi.id_pelanggan", "LEFT")
-            ->where("transaksi." . $this->deletedField)
             ->where("transaksi.id_transaksi", $id)
             ->first();
 
