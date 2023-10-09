@@ -16,7 +16,7 @@ class Pesanan extends Base
 
     public function transaksi($idTransaksi): string
     {
-        $this->setBc([["/", "Beranda"], ["transaksi", "Transaksi"], $idTransaksi]);
+        $this->setBc([["/", "Beranda"], ["transaksi", "Transaksi"], "Pesanan $idTransaksi"]);
         $this->setHeader("Transaksi " . $idTransaksi);
         $data = ["idTransaksi" => $idTransaksi];
         return $this->tampil("pesanan/index", $data);
