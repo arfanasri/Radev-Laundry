@@ -65,10 +65,17 @@ $routes->post("transaksi/halaman/(:segment)", "Transaksi::halaman/$1", ["as" => 
 $routes->post("transaksi/tambah", "Transaksi::tambah", ["as" => "transaksi.tambah"]);
 
 // Pesanan
-$routes->get("transaksi/(:segment)", "Pesanan::transaksi/$1", ["as" => "pesanan"]);
+$routes->get("transaksi/(:segment)/pesanan", "Pesanan::transaksi/$1", ["as" => "pesanan"]);
 $routes->post("pesanan/data/(:segment)", "Pesanan::data/$1", ["as" => "pesanan.data"]);
 $routes->post("pesanan/datalayanan", "Pesanan::dataLayanan", ["as" => "pesanan.datalayanan"]);
 $routes->post("pesanan/cari/(:segment)/(:segment)", "Pesanan::cari/$1/$2", ["as" => "pesanan.cari"]);
 $routes->post("pesanan/carilayanan/(:segment)", "Pesanan::cariLayanan/$1", ["as" => "pesanan.carilayanan"]);
 $routes->post("pesanan/tambah/(:segment)/(:segment)", "Pesanan::tambah/$1/$2", ["as" => "pesanan.tambah"]);
 $routes->post("pesanan/ubah/(:segment)", "Pesanan::ubah/$1", ["as" => "pesanan.ubah"]);
+
+// Pembayaran
+$routes->get("transaksi/(:segment)/pembayaran", "Pembayaran::transaksi/$1", ["as" => "pembayaran"]);
+$routes->post("pembayaran/data/(:segment)", "Pembayaran::data/$1", ["as" => "pembayaran.data"]);
+$routes->post("pembayaran/datatransaksi", "Pembayaran::dataTransaksi", ["as" => "pembayaran.datatransaksi"]);
+$routes->post("pembayaran/tambah/(:segment)/(:segment)", "Pembayaran::tambah/$1/$2", ["as" => "pembayaran.tambah"]);
+$routes->post("pembayaran/ubah/(:segment)", "Pembayaran::ubah/$1", ["as" => "pembayaran.ubah"]);
