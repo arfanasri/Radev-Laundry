@@ -11,6 +11,7 @@ class PembayaranModel extends BaseModel
     protected $useAutoIncrement = true;
     protected $allowedFields = [
         'id_transaksi',
+        'tanggal_pembayaran',
         'banyak',
         'keterangan',
     ];
@@ -18,6 +19,7 @@ class PembayaranModel extends BaseModel
     // Validation
     protected $validationRules = [
         'id_transaksi' => 'required',
+        'tanggal_pembayaran' => 'required',
         'banyak' => 'required',
     ];
 }
