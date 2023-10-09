@@ -127,6 +127,7 @@ class StartSeeder extends Seeder
 
             $pembayaran = [
                 "id_transaksi" => $idTransaksi,
+                "tanggal_pembayaran" => $transaksi["tanggal_transaksi"],
                 "banyak" => $totalPembayaran,
                 "keterangan" => "Lunas",
             ];
