@@ -3,7 +3,6 @@
 namespace App\Controllers\Api;
 
 use App\Controllers\BaseController;
-use App\Models\LayananModel;
 use App\Models\PembayaranModel;
 use CodeIgniter\API\ResponseTrait;
 
