@@ -22,4 +22,10 @@ class PembayaranModel extends BaseModel
         'tanggal_pembayaran' => 'required',
         'banyak' => 'required',
     ];
+
+    public function sudahBayar($idTransaksi)
+    {
+        $transaksi = $this->selectSum("banyak", "sudah_bayar")->where("id_transaksi", $idTransaksi)->first();
+        return $transaksi["sudah_bayar"];
+    }
 }
