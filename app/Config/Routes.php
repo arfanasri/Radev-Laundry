@@ -76,6 +76,6 @@ $routes->post("pesanan/ubah/(:segment)", "Pesanan::ubah/$1", ["as" => "pesanan.u
 // Pembayaran
 $routes->get("transaksi/(:segment)/pembayaran", "Pembayaran::transaksi/$1", ["as" => "pembayaran"]);
 $routes->post("pembayaran/data/(:segment)", "Pembayaran::data/$1", ["as" => "pembayaran.data"]);
-$routes->post("pembayaran/datatransaksi", "Pembayaran::dataTransaksi", ["as" => "pembayaran.datatransaksi"]);
+$routes->post("pembayaran/datatransaksi/(:segment)", "Pembayaran::dataTransaksi/$1", ["as" => "pembayaran.datatransaksi"]);
 $routes->post("pembayaran/tambah/(:segment)/(:segment)", "Pembayaran::tambah/$1/$2", ["as" => "pembayaran.tambah"]);
 $routes->post("pembayaran/ubah/(:segment)", "Pembayaran::ubah/$1", ["as" => "pembayaran.ubah"]);
