@@ -20,7 +20,7 @@ class Pembayaran extends Base
         $this->setBc([["/", "Beranda"], ["transaksi", "Transaksi"], "Pembayaran $idTransaksi"]);
         $this->setHeader("Transaksi " . $idTransaksi);
         $data = ["idTransaksi" => $idTransaksi];
-        return $this->tampil("pesanan/index", $data);
+        return $this->tampil("pembayaran/index", $data);
     }
 
     public function data($idTransaksi): string
@@ -28,19 +28,27 @@ class Pembayaran extends Base
         $model = new PembayaranModel();
 
         $data = [
-            "pembayaraan" => $model->where("id_transaksi", $idTransaksi)->ambilSemua(),
+            "pembayaran" => $model->where("id_transaksi", $idTransaksi)->ambilSemua(),
         ];
 
-        $json = view('pembayaraan/data', $data);
+        $json = view('pembayaran/data', $data);
         return $json;
     }
 
     public function dataTransaksi($idTransaksi): string
     {
         $transaksiModel = new TransaksiModel();
+        $model = new PembayaranModel();
+
+        $transaksi = $transaksiModel->ambilData($idTransaksi);
+        $totalPembayaran = $transaksi["harga_total"];
+        $sudahBayar = $model->sudahBayar($idTransaksi);
+        $sisaBayar = $totalPembayaran - $sudahBayar;
 
         $data = [
-            "transaksi" => $transaksiModel->ambilData($idTransaksi),
+            "transaksi" => $transaksi,
+            "sudahBayar" => $sudahBayar,
+            "sisaBayar" => $sisaBayar,
         ];
 
         $json = view('pembayaran/data_transaksi', $data);
@@ -62,6 +70,7 @@ class Pembayaran extends Base
         $pembayaran = $model->ambilData($id);
         $data = [
             "data" => $pembayaran,
+            "idTransaksi" => $pembayaran["id_transaksi"],
         ];
         $json = view('pembayaran/ubah', $data);
         return $json;
