@@ -58,6 +58,7 @@ class Pesanan extends Base
             "pesanan" => $pesanan,
         ];
 
+
         $json = view('pesanan/data', $data);
         return $json;
     }
