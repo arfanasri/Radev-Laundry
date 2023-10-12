@@ -13,6 +13,10 @@ class Layanan extends Base
         $this->bc = [["/", "Beranda"], "Layanan"];
     }
 
+    /**
+     * Tampilan utama Layanan
+     * @return string
+     */
     public function index(): string
     {
         $model = new LayananModel();
@@ -22,6 +26,10 @@ class Layanan extends Base
         return $this->tampil("layanan/index", $data);
     }
 
+    /**
+     * Tampilan data layanan
+     * @return string
+     */
     public function data(): string
     {
         $model = new LayananModel();
@@ -34,7 +42,12 @@ class Layanan extends Base
         return $json;
     }
 
-    public function cari($cari): string
+    /**
+     * Tampilan cari data layanan
+     * @param string $cari Teks yang ingin dicari
+     * @return string
+     */
+    public function cari(string $cari): string
     {
         $model = new LayananModel();
         $layanan = $model
@@ -51,7 +64,13 @@ class Layanan extends Base
         return $json;
     }
 
-    public function halaman($laman, $tampil = 50): string
+    /**
+     * Tampilan halaman data layanan
+     * @param int $laman Nomor Halaman
+     * @param int $tampil Berapa banyak yang tampil
+     * @return string
+     */
+    public function halaman(int $laman, int $tampil = 50): string
     {
         $model = new LayananModel();
 
@@ -68,6 +87,10 @@ class Layanan extends Base
         return $json;
     }
 
+    /**
+     * Tampilan form tambah layanan
+     * @return string
+     */
     public function tambah(): string
     {
         $data = [];
@@ -75,6 +98,11 @@ class Layanan extends Base
         return $json;
     }
 
+    /**
+     * Tammpilan form ubah layanan
+     * @param mixed $id ID Layanan
+     * @return string
+     */
     public function ubah($id): string
     {
         $model = new LayananModel();
