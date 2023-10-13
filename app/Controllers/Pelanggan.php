@@ -13,6 +13,10 @@ class Pelanggan extends Base
         $this->bc = [["/", "Beranda"], "Pelanggan"];
     }
 
+    /**
+     * Tampilan utama Pelanggan
+     * @return string
+     */
     public function index(): string
     {
         $model = new PelangganModel();
@@ -22,6 +26,10 @@ class Pelanggan extends Base
         return $this->tampil("pelanggan/index", $data);
     }
 
+    /**
+     * Tampilan data Pelanggan
+     * @return string
+     */
     public function data(): string
     {
         $model = new PelangganModel();
@@ -34,6 +42,11 @@ class Pelanggan extends Base
         return $json;
     }
 
+    /**
+     * Tampilan cari data pelanggan
+     * @param mixed $cari Kata kunci yang ingin dicari
+     * @return string
+     */
     public function cari($cari): string
     {
         $model = new PelangganModel();
@@ -50,7 +63,13 @@ class Pelanggan extends Base
         return $json;
     }
 
-    public function halaman($laman, $tampil = 50): string
+    /**
+     * Tampilan halaman data pelanggan
+     * @param int $laman Nomor halaman
+     * @param int $tampil Banyak data yang tampil
+     * @return string
+     */
+    public function halaman(int $laman, int $tampil = 50): string
     {
         $model = new PelangganModel();
 
@@ -67,6 +86,10 @@ class Pelanggan extends Base
         return $json;
     }
 
+    /**
+     * Tampilan form tambah pelanggan
+     * @return string
+     */
     public function tambah(): string
     {
         $data = [];
@@ -74,6 +97,11 @@ class Pelanggan extends Base
         return $json;
     }
 
+    /**
+     * Tampilan form ubah pelanggan
+     * @param mixed $id ID Pelanggan
+     * @return string
+     */
     public function ubah($id): string
     {
         $model = new PelangganModel();
