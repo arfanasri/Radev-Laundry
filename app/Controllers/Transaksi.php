@@ -15,6 +15,10 @@ class Transaksi extends Base
         $this->bc = [["/", "Beranda"], "Transaksi"];
     }
 
+    /**
+     * Tampilan utama transaksi
+     * @return string
+     */
     public function index(): string
     {
         $model = new TransaksiModel();
@@ -24,6 +28,10 @@ class Transaksi extends Base
         return $this->tampil("transaksi/index", $data);
     }
 
+    /**
+     * Tampilan data transaksi
+     * @return string
+     */
     public function data(): string
     {
         $model = new TransaksiModel();
@@ -36,6 +44,11 @@ class Transaksi extends Base
         return $json;
     }
 
+    /**
+     * Tampilan data pesanan berdasarkan transaksi
+     * @param mixed $idTransaksi ID Transaksi
+     * @return string
+     */
     public function pesanan($idTransaksi): string
     {
         $pesananModel = new PesananModel();
@@ -48,6 +61,11 @@ class Transaksi extends Base
         return $json;
     }
 
+    /**
+     * Tampilan cari data transaksi
+     * @param mixed $cari
+     * @return string
+     */
     public function cari($cari): string
     {
         $model = new TransaksiModel();
@@ -66,6 +84,12 @@ class Transaksi extends Base
         return $json;
     }
 
+    /**
+     * Tampilan halaman data transaksi
+     * @param mixed $laman Nomor Halaman
+     * @param mixed $tampil Banyak data yang tampil
+     * @return string
+     */
     public function halaman($laman, $tampil = 50): string
     {
         $model = new TransaksiModel();
@@ -83,6 +107,10 @@ class Transaksi extends Base
         return $json;
     }
 
+    /**
+     * Tampilan form tambah transaksi
+     * @return string
+     */
     public function tambah(): string
     {
         $pelangganModel = new PelangganModel();
