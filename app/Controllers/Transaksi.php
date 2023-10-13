@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PelangganModel;
+use App\Models\PesananModel;
 use App\Models\TransaksiModel;
 
 class Transaksi extends Base
@@ -32,6 +33,18 @@ class Transaksi extends Base
         ];
 
         $json = view('transaksi/data', $data);
+        return $json;
+    }
+
+    public function pesanan($idTransaksi): string
+    {
+        $pesananModel = new PesananModel();
+
+        $data = [
+            "pesanan" => $pesananModel->where("id_transaksi", $idTransaksi)->ambilSemua(),
+        ];
+
+        $json = view('transaksi/data_pesanan', $data);
         return $json;
     }
 

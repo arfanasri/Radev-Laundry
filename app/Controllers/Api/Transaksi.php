@@ -178,4 +178,19 @@ class Transaksi extends ResourceController
 
         return $this->respondDeleted($respon);
     }
+
+    public function status($id = null, $status = null)
+    {
+        if (is_null($id) || is_null($status)) {
+            return $this->fail("ID atau Status Tidak terisi");
+        }
+
+        $model = new TransaksiModel();
+
+        $data = ["status" => $status];
+
+        $respon = ["transaksi" => $model->ubahData($id, $data)];
+
+        return $this->respondUpdated($respon);
+    }
 }
