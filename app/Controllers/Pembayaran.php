@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\LayananModel;
 use App\Models\PembayaranModel;
 use App\Models\TransaksiModel;
 
@@ -15,6 +14,11 @@ class Pembayaran extends Base
         $this->bc = [["/", "Beranda"], "Pembayaran"];
     }
 
+    /**
+     * Tampilan utama Pembayaran
+     * @param mixed $idTransaksi ID Transaksi
+     * @return string
+     */
     public function transaksi($idTransaksi): string
     {
         $this->setBc([["/", "Beranda"], ["transaksi", "Transaksi"], "Pembayaran $idTransaksi"]);
@@ -23,6 +27,11 @@ class Pembayaran extends Base
         return $this->tampil("pembayaran/index", $data);
     }
 
+    /**
+     * Tampilan data pembayaran berdasarkan transaksi
+     * @param mixed $idTransaksi ID Transaksi
+     * @return string
+     */
     public function data($idTransaksi): string
     {
         $model = new PembayaranModel();
@@ -35,6 +44,11 @@ class Pembayaran extends Base
         return $json;
     }
 
+    /**
+     * Tampilan data transaksi
+     * @param mixed $idTransaksi ID Transaksi
+     * @return string
+     */
     public function dataTransaksi($idTransaksi): string
     {
         $transaksiModel = new TransaksiModel();
@@ -55,6 +69,11 @@ class Pembayaran extends Base
         return $json;
     }
 
+    /**
+     * Tampilan form tambah pembayaran
+     * @param mixed $idTransaksi ID Transaksi
+     * @return string
+     */
     public function tambah($idTransaksi): string
     {
         $data = [
@@ -64,6 +83,11 @@ class Pembayaran extends Base
         return $json;
     }
 
+    /**
+     * Tampilan form ubah pembayaran
+     * @param mixed $id ID Pembayaran
+     * @return string
+     */
     public function ubah($id): string
     {
         $model = new PembayaranModel();
