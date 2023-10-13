@@ -14,6 +14,11 @@ class Pesanan extends Base
         $this->bc = [["/", "Beranda"], "Pesanan"];
     }
 
+    /**
+     * Tampilan utama pesanan
+     * @param mixed $idTransaksi ID Transaksi
+     * @return string
+     */
     public function transaksi($idTransaksi): string
     {
         $this->setBc([["/", "Beranda"], ["transaksi", "Transaksi"], "Pesanan $idTransaksi"]);
@@ -22,6 +27,11 @@ class Pesanan extends Base
         return $this->tampil("pesanan/index", $data);
     }
 
+    /**
+     * Tampilan data pesanan berdasarkan transaksi
+     * @param mixed $idTransaksi ID Transaksi
+     * @return string
+     */
     public function data($idTransaksi): string
     {
         $model = new PesananModel();
@@ -34,6 +44,10 @@ class Pesanan extends Base
         return $json;
     }
 
+    /**
+     * Tampilan data layanan
+     * @return string
+     */
     public function dataLayanan(): string
     {
         $layananModel = new LayananModel();
@@ -46,6 +60,12 @@ class Pesanan extends Base
         return $json;
     }
 
+    /**
+     * Tampilan cari data pesanan berdasarkan trans
+     * @param mixed $idTransaksi ID Transaksi
+     * @param mixed $cari Keyword yang ingin dicari
+     * @return string
+     */
     public function cari($idTransaksi, $cari): string
     {
         $model = new PesananModel();
@@ -63,6 +83,11 @@ class Pesanan extends Base
         return $json;
     }
 
+    /**
+     * Tampilan cari data layanan
+     * @param mixed $cari Keyword yang ingin dicari
+     * @return string
+     */
     public function cariLayanan($cari): string
     {
         $model = new LayananModel();
@@ -78,6 +103,12 @@ class Pesanan extends Base
         return $json;
     }
 
+    /**
+     * Form tambah pesanan
+     * @param mixed $idTransaksi ID Transaksi
+     * @param mixed $idLayanan ID Layanan
+     * @return string
+     */
     public function tambah($idTransaksi, $idLayanan): string
     {
         $layananModel = new LayananModel();
@@ -89,6 +120,11 @@ class Pesanan extends Base
         return $json;
     }
 
+    /**
+     * Form ubah pesanan
+     * @param mixed $id ID Pesanan
+     * @return string
+     */
     public function ubah($id): string
     {
         $model = new PesananModel();
