@@ -71,7 +71,7 @@ class Pesanan extends Base
         $model = new PesananModel();
         $pesanan = $model
             ->like("layanan.nama_layanan", $cari)
-            ->like("layanan.id_transaksi", $idTransaksi)
+            ->like("pesanan.id_transaksi", $idTransaksi)
             ->ambilSemua();
 
         $data = [
