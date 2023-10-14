@@ -120,4 +120,29 @@ class Transaksi extends Base
         $json = view('transaksi/tambah', $data);
         return $json;
     }
+
+    public function nota($idTransaksi)
+    {
+        $model = new TransaksiModel();
+        $pesananModel = new PesananModel();
+        $pelangganModel = new PelangganModel();
+        $transaksi = $model->ambilData($idTransaksi);
+        $pesanan = $pesananModel->where("id_transaksi", $idTransaksi)->ambilSemua();
+        if (count($pesanan) == 0) {
+            return throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        $pelanggan = $pelangganModel->ambilData($transaksi["id_pelanggan"]);
+        $pdf = new \FPDF();
+        $data = [
+            "transaksi" => $transaksi,
+            "pesanan" => $pesanan,
+            "pelanggan" => $pelanggan,
+            "pdf" => $pdf,
+        ];
+
+
+
+        return view("transaksi/nota", $data);
+
+    }
 }
