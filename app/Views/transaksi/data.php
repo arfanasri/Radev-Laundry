@@ -34,10 +34,10 @@
                         <?= $dt['tanggal_transaksi'] ?>
                     </td>
                     <td>
-                        <?= $dt['harga_total'] ?>
+                        <?= rupiah($dt['harga_total']) ?>
                     </td>
                     <td>
-                        <?= $dt['status'] ?>
+                        <?= normalkan($dt['status']) ?>
                     </td>
                     <td>
                         <div class="btn-group">
@@ -58,7 +58,7 @@
                                     class="btn btn-primary btn-sm">Proses</button>
                             <?php elseif ($dt["status"] == 'proses'): ?>
                                 <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'siap_diambil')"
-                                    class="btn btn-primary btn-sm">Siap Diambil</button>
+                                    class="btn btn-primary btn-sm">Siap diambil</button>
                             <?php elseif ($dt["status"] == 'siap_diambil'): ?>
                                 <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'selesai')"
                                     class="btn btn-primary btn-sm">Selesai</button>
