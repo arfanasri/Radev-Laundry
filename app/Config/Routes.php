@@ -84,3 +84,7 @@ $routes->post("pembayaran/data/(:segment)", "Pembayaran::data/$1", ["as" => "pem
 $routes->post("pembayaran/datatransaksi/(:segment)", "Pembayaran::dataTransaksi/$1", ["as" => "pembayaran.datatransaksi"]);
 $routes->post("pembayaran/tambah/(:segment)", "Pembayaran::tambah/$1", ["as" => "pembayaran.tambah"]);
 $routes->post("pembayaran/ubah/(:segment)", "Pembayaran::ubah/$1", ["as" => "pembayaran.ubah"]);
+
+service('auth')->routes($routes);
+
+$routes->get("test", "Home::test");
