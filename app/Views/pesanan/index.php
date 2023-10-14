@@ -18,6 +18,15 @@
                 </div>
             </div>
             <div class="card-body" id="tampildatalayanan">
+                <div class="container">
+                    <div class="row justify-content-center my-5">
+                        <div class="col-12 text-center my-5">
+                            <div id="rotating-gear"><i class="fas fa-cog fa-spin fa-3x"></i>
+                                <h2>Memuat Halaman</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -37,6 +46,15 @@
                 </div>
             </div>
             <div class="card-body" id="tampildatapesanan">
+                <div class="container">
+                    <div class="row justify-content-center my-5">
+                        <div class="col-12 text-center my-5">
+                            <div id="rotating-gear"><i class="fas fa-cog fa-spin fa-3x"></i>
+                                <h2>Memuat Halaman</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
