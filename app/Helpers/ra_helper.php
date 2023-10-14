@@ -176,6 +176,14 @@ if (!function_exists('rupiah')) {
      */
     function rupiah(int $id): string
     {
-        return "Rp " . number_format($id, 0, ',', '.');
+        return "Rp&nbsp;" . number_format($id, 0, ',', '.');
+    }
+}
+
+if (!function_exists('normalkan')) {
+    function normalkan(string $string): string
+    {
+        $string = str_replace("_", "&nbsp;", $string);
+        return ucwords($string);
     }
 }
