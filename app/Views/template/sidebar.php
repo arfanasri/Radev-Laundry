@@ -14,7 +14,7 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Pelanggan
             </a>
-            <a class="nav-link <?= menu($menu, "pelanggan") ?>" href="<?= url_to("transaksi") ?>">
+            <a class="nav-link <?= menu($menu, "transaksi") ?>" href="<?= url_to("transaksi") ?>">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Transaksi
             </a>
