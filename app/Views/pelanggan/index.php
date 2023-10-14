@@ -4,17 +4,14 @@
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-md-4 pb-2">
+            <div class="col-md-8 pb-2">
                 Data Pelanggan
             </div>
-            <div class="col-md-6 pb-2">
-                <div class="row">
-                    <label for="cari" class="col-sm-2 col-form-label">Cari :</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="cari" placeholder="Cari"
-                            onchange="cariPelanggan(this.value)">
-                    </div>
-                </div>
+            <div class="col-md-2 d-grid gap-2 pb-2">
+                <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalcari">
+                    Cari
+                </button>
             </div>
             <div class="col-md-2 d-grid gap-2 pb-2">
                 <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal"
@@ -51,6 +48,28 @@
 <div class="modal fade" id="modaltampil" tabindex="-1" aria-labelledby="modaltampilLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" id="isimodal">
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cari -->
+<div class="modal fade" id="modalcari" tabindex="-1" aria-labelledby="modalcariLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalCariLabel">Cari Pelanggan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 px-3">
+                    <input type="text" class="form-control" id="cariData" placeholder="Data yang ingin dicari">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-danger" onclick="tombolBersihCari()">Bersihkan</button>
+                <button type="button" class="btn btn-primary" onclick="tombolCari()">Cari</button>
+            </div>
         </div>
     </div>
 </div>
@@ -208,8 +227,13 @@
     }
 
     function tombolCari() {
-        const cari = document.querySelector("#cari").value;
+        const cari = document.querySelector("#cariData").value;
         cariPelanggan(cari);
+    }
+
+    function tombolBersihCari() {
+        document.querySelector("#cariData").value = "";
+        cariPelanggan("");
     }
 
     function perubahanData() {

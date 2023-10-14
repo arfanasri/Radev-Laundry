@@ -6,17 +6,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-5 pb-2">
+                    <div class="col-md-10 pb-2">
                         Data Layanan
                     </div>
-                    <div class="col-md-7 pb-2">
-                        <div class="row">
-                            <label for="carilayanan" class="col-sm-4 col-form-label">Cari :</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="carilayanan" placeholder="Cari"
-                                    onchange="cariLayanan(this.value)">
-                            </div>
-                        </div>
+                    <div class="col-md-2 d-grid gap-2 pb-2">
+                        <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalcarilayanan">
+                            Cari
+                        </button>
                     </div>
                 </div>
             </div>
@@ -28,17 +25,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-5 pb-2">
+                    <div class="col-md-10 pb-2">
                         Data Pesanan
                     </div>
-                    <div class="col-md-7 pb-2">
-                        <div class="row">
-                            <label for="caripesanan" class="col-sm-4 col-form-label">Cari :</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="caripesanan" placeholder="Cari"
-                                    onchange="cariPesanan(this.value)">
-                            </div>
-                        </div>
+                    <div class="col-md-2 d-grid gap-2 pb-2">
+                        <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalcaripesanan">
+                            Cari
+                        </button>
                     </div>
                 </div>
             </div>
@@ -53,6 +47,50 @@
 <div class="modal fade" id="modaltampil" tabindex="-1" aria-labelledby="modaltampilLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" id="isimodal">
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cari Layanan -->
+<div class="modal fade" id="modalcarilayanan" tabindex="-1" aria-labelledby="modalcarilayananLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalcarilayananLabel">Cari Layanan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 px-3">
+                    <input type="text" class="form-control" id="cariDataLayanan" placeholder="Data yang ingin dicari">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-danger" onclick="tombolBersihCariLayanan()">Bersihkan</button>
+                <button type="button" class="btn btn-primary" onclick="tombolCariLayanan()">Cari</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cari Pesanan -->
+<div class="modal fade" id="modalcaripesanan" tabindex="-1" aria-labelledby="modalcaripesananLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalcaripesananLabel">Cari Pesanan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 px-3">
+                    <input type="text" class="form-control" id="cariDataPesanan" placeholder="Data yang ingin dicari">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-danger" onclick="tombolBersihCariPesanan()">Bersihkan</button>
+                <button type="button" class="btn btn-primary" onclick="tombolCariPesanan()">Cari</button>
+            </div>
         </div>
     </div>
 </div>
@@ -232,9 +270,24 @@
         }
     }
 
-    function tombolCari() {
-        const cari = document.querySelector("#caripesanan").value;
+    function tombolCariLayanan() {
+        const cari = document.querySelector("#cariDataLayanan").value;
+        cariLayanan(cari);
+    }
+
+    function tombolBersihCariLayanan() {
+        document.querySelector("#cariDataLayanan").value = "";
+        cariLayanan("");
+    }
+
+    function tombolCariPesanan() {
+        const cari = document.querySelector("#cariDataPesanan").value;
         cariPesanan(cari);
+    }
+
+    function tombolBersihCariPesanan() {
+        document.querySelector("#cariDataPesanan").value = "";
+        cariPesanan("");
     }
 
     function perubahanData() {
