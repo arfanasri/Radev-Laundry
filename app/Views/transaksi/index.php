@@ -132,11 +132,33 @@
 
     async function tambahTransaksi() {
         try {
-            const response = await axios.post('<?= url_to("transaksi.tambah") ?>');
+            const response = await axios.post('<?= site_url("transaksi/tambah") ?>');
             document.querySelector("#isimodal").innerHTML = response.data;
         } catch (error) {
             console.error(error);
         }
+    }
+
+    function konfirmasiStatus(id, status) {
+        Swal.fire({
+            title: 'Apakah anda yakin ingin mengubah ' + id.toString() + '?',
+            text: "Status transaksi " + id.toString() + " akan menjadi " + status.toString(),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                statusTransaksi(id, status);
+                Swal.fire(
+                    'Status Berubah',
+                    'Status transaksi ' + id.toString() + ' berhasil dijadi ' + status.toString(),
+                    'success'
+                )
+            }
+        })
     }
 
     function konfirmasiHapus(id) {
@@ -165,7 +187,7 @@
         const onklik = sebelumSimpan();
         try {
             const data = ambilDataForm();
-            const response = await axios.post('<?= url_to("api/transaksi") ?>', data);
+            const response = await axios.post('<?= site_url("api/transaksi") ?>', data);
             modal.toggle();
             perubahanData();
             Swal.fire({
@@ -189,9 +211,18 @@
         setelahSimpan(onklik);
     }
 
+    async function statusTransaksi(id, status) {
+        try {
+            const response = await axios.patch('<?= site_url("api/transaksi/status") ?>/' + id.toString() + '/' + status.toString());
+            perubahanData();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     async function deleteTransaksi(id) {
         try {
-            const response = await axios.delete('<?= url_to("api/transaksi") ?>/' + id.toString());
+            const response = await axios.delete('<?= site_url("api/transaksi") ?>/' + id.toString());
             perubahanData();
         } catch (error) {
             console.error(error);
