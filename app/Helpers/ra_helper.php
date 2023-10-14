@@ -174,9 +174,9 @@ if (!function_exists('rupiah')) {
      * 
      * @return string Nilai dengan format rupiah
      */
-    function rupiah(int $id): string
+    function rupiah(int $id, $space = "&nbsp;"): string
     {
-        return "Rp&nbsp;" . number_format($id, 0, ',', '.');
+        return "Rp$space" . number_format($id, 0, ',', '.');
     }
 }
 
