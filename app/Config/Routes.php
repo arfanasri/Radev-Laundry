@@ -8,14 +8,18 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
+    // Layanan
     $routes->get("layanan/page/(:segment)/(:segment)", "Layanan::page/$1/$2");
     $routes->get("layanan/search/(:segment)", "Layanan::search/$1");
+    $routes->resource('layanan');
+    // Pelanggan
     $routes->get("pelanggan/page/(:segment)/(:segment)", "Pelanggan::page/$1/$2");
     $routes->get("pelanggan/search/(:segment)", "Pelanggan::search/$1");
+    $routes->resource('pelanggan');
+    // Transaksi
     $routes->get("transaksi/page/(:segment)/(:segment)", "Transaksi::page/$1/$2");
     $routes->get("transaksi/search/(:segment)", "Transaksi::search/$1");
-    $routes->resource('layanan');
-    $routes->resource('pelanggan');
+    $routes->patch('transaksi/status/(:segment)/(:segment)', 'Transaksi::status/$1/$2');
     $routes->resource('transaksi');
     // Pesanan
     $routes->get('pesanan/(:segment)/new', 'Pesanan::new/$1');
