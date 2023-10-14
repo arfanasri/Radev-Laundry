@@ -62,6 +62,7 @@ $routes->post("pelanggan/ubah/(:segment)", "Pelanggan::ubah/$1", ["as" => "pelan
 
 // Transaksi
 $routes->get("transaksi", "Transaksi::index", ["as" => "transaksi"]);
+$routes->get("transaksi/nota/(:segment)", "Transaksi::nota/$1", ["as" => "transaksi.nota"]);
 $routes->post("transaksi", "Transaksi::data", ["as" => "transaksi.data"]);
 $routes->post("transaksi/halaman/(:segment)/(:segment)", "Transaksi::halaman/$1/$2", ["as" => "transaksi.halaman.limit"]);
 $routes->post("transaksi/cari/(:segment)", "Transaksi::cari/$1", ["as" => "transaksi.cari"]);
