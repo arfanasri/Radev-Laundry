@@ -140,9 +140,6 @@ class Transaksi extends Base
             "pdf" => $pdf,
         ];
 
-
-
         return view("transaksi/nota", $data);
-
     }
 }
