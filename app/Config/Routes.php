@@ -39,7 +39,11 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
     $routes->put('pembayaran/(:segment)/(:segment)', 'Pembayaran::update/$1/$2');
     $routes->patch('pembayaran/(:segment)/(:segment)', 'Pembayaran::update/$1/$2');
     $routes->delete('pembayaran/(:segment)/(:segment)', 'Pembayaran::delete/$1/$2');
-    // Halaman
+    // User
+    $routes->get("user/page/(:segment)/(:segment)", "User::page/$1/$2");
+    $routes->get("user/search/(:segment)", "User::search/$1");
+    $routes->resource('user');
+
 });
 
 // Layanan
@@ -84,5 +88,14 @@ $routes->post("pembayaran/data/(:segment)", "Pembayaran::data/$1", ["as" => "pem
 $routes->post("pembayaran/datatransaksi/(:segment)", "Pembayaran::dataTransaksi/$1", ["as" => "pembayaran.datatransaksi"]);
 $routes->post("pembayaran/tambah/(:segment)", "Pembayaran::tambah/$1", ["as" => "pembayaran.tambah"]);
 $routes->post("pembayaran/ubah/(:segment)", "Pembayaran::ubah/$1", ["as" => "pembayaran.ubah"]);
+
+// User
+$routes->get("user", "User::index", ["as" => "user"]);
+$routes->post("user", "User::data", ["as" => "user.data"]);
+$routes->post("user/halaman/(:segment)/(:segment)", "User::halaman/$1/$2", ["as" => "user.halaman.limit"]);
+$routes->post("user/cari/(:segment)", "User::cari/$1", ["as" => "user.cari"]);
+$routes->post("user/halaman/(:segment)", "User::halaman/$1", ["as" => "user.halaman"]);
+$routes->post("user/tambah", "User::tambah", ["as" => "user.tambah"]);
+$routes->post("user/ubah/(:segment)", "User::ubah/$1", ["as" => "user.ubah"]);
 
 $routes->get("test", "Home::test");
