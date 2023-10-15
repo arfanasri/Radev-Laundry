@@ -7,6 +7,7 @@ use App\Models\PelangganModel;
 use App\Models\PembayaranModel;
 use App\Models\PesananModel;
 use App\Models\TransaksiModel;
+use App\Models\UserModel;
 use CodeIgniter\Database\Seeder;
 
 class StartSeeder extends Seeder
@@ -18,6 +19,15 @@ class StartSeeder extends Seeder
         $transaksiModel = new TransaksiModel();
         $pesananModel = new PesananModel();
         $pembayaranModel = new PembayaranModel();
+        $userModel = new UserModel();
+
+        $dataUser = [
+            "id_user" => "admin",
+            "nama_user" => "Admin",
+            "password" => "admin",
+        ];
+
+        $userModel->tambahData($dataUser);
 
         $banyakTransaksi = 500;
         $banyakPelanggan = 50;

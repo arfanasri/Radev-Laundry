@@ -13,8 +13,6 @@ class UserMigration extends Migration
             'id_user' => [
                 'type' => 'VARCHAR',
                 'constraint' => 20,
-                'unsigned' => true,
-                'auto_increment' => true,
             ],
             'nama_user' => [
                 'type' => 'VARCHAR',
