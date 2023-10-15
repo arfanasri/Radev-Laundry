@@ -11,4 +11,9 @@ class Home extends Base
         $this->setBc(["Beranda"]);
         return $this->tampil('contoh_isi', []);
     }
+
+    public function test()
+    {
+
+    }
 }
