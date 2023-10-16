@@ -38,6 +38,32 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.all.min.js"></script>
     <script src="<?= base_url() ?>assets/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function ready(callback) {
+            if (document.readyState != 'loading') callback();
+            else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+            else document.attachEvent('onreadystatechange', function () {
+                if (document.readyState == 'complete') callback();
+            })
+        };
+
+        ready(function () {
+            <?php if (session()->get("pberhasil")): ?>
+                Swal.fire(
+                    'Berhasil',
+                    '<?= session()->get("pberhasil") ?>',
+                    'success'
+                )
+            <?php endif ?>
+            <?php if (session()->get("pgagal")): ?>
+                Swal.fire(
+                    'Gagal',
+                    '<?= session()->get("pgagal") ?>',
+                    'error'
+                )
+            <?php endif ?>
+        })
+    </script>
     <?= $this->renderSection("js") ?>
 </body>
 
