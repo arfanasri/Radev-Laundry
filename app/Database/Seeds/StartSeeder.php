@@ -6,6 +6,7 @@ use App\Models\LayananModel;
 use App\Models\PelangganModel;
 use App\Models\PembayaranModel;
 use App\Models\PesananModel;
+use App\Models\SettingModel;
 use App\Models\TransaksiModel;
 use App\Models\UserModel;
 use CodeIgniter\Database\Seeder;
@@ -20,6 +21,12 @@ class StartSeeder extends Seeder
         $pesananModel = new PesananModel();
         $pembayaranModel = new PembayaranModel();
         $userModel = new UserModel();
+        $settingModel = new SettingModel();
+
+        $banyakTransaksi = 500;
+        $banyakPelanggan = 50;
+        $maksimalPesanan = 10;
+        $maksimalBanyak = 10;
 
         $dataUser = [
             "id_user" => "admin",
@@ -29,8 +36,20 @@ class StartSeeder extends Seeder
 
         $userModel->tambahData($dataUser);
 
-        $banyakTransaksi = 500;
-        $banyakPelanggan = 50;
+        $dataSetting = [
+            [
+                "nama_setting" => "nama_laundry",
+                "nilai_setting" => "Radev Laundry"
+            ],
+            [
+                "nama_setting" => "alamat_laundry",
+                "nilai_setting" => "Alamat Radev Laundry"
+            ],
+        ];
+
+        foreach ($dataSetting as $setting) {
+            $settingModel->tambahData($setting);
+        }
 
         $dataLayanan = [
             [
@@ -119,11 +138,11 @@ class StartSeeder extends Seeder
 
             $faker = \Faker\Factory::create("id_ID");
 
-            $banyakPesanan = $faker->numberBetween(1, 4);
+            $banyakPesanan = $faker->numberBetween(1, $maksimalPesanan);
             $totalPembayaran = 0;
             for ($i = 0; $i < $banyakPesanan; $i++) {
                 $idLayanan = $faker->numberBetween(1, $banyakLayanan);
-                $banyak = $faker->numberBetween(1, 10);
+                $banyak = $faker->numberBetween(1, $maksimalBanyak);
                 $pesanan = [
                     "id_transaksi" => $idTransaksi,
                     "id_layanan" => $idLayanan,
