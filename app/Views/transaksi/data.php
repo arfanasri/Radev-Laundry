@@ -41,6 +41,8 @@
                     </td>
                     <td>
                         <div class="btn-group">
+                            <a class="btn btn-light btn-sm" target="_blank"
+                                href="<?= url_to("transaksi.nota", $dt["id_transaksi"]) ?>">Cetak</a>
                             <?php if ($dt["status"] == "pencatatan"): ?>
                                 <a class="btn btn-success btn-sm"
                                     href="<?= url_to("pesanan", $dt["id_transaksi"]) ?>">Pesanan</a>
