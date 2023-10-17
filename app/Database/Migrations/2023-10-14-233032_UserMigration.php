@@ -8,7 +8,6 @@ class UserMigration extends Migration
 {
     public function up()
     {
-
         $fields = [
             'id_user' => [
                 'type' => 'VARCHAR',
