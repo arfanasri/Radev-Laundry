@@ -8,7 +8,8 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>
-        <?= $header ?> - SB Admin
+        <?= $header ?> -
+        <?= session("app_laundry_nama") ?>
     </title>
     <link href="<?= base_url() ?>assets/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
