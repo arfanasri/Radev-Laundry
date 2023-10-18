@@ -24,7 +24,7 @@ class Setting extends Base
             "namaLaundry" => $model->ambilData("nama_laundry"),
             "alamatLaundry" => $model->ambilData("alamat_laundry"),
         ];
-        return $this->tampil("layanan/index", $data);
+        return $this->tampil("setting/index", $data);
     }
 
     /**
