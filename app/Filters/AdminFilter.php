@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Models\SettingModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -25,9 +26,22 @@ class AdminFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
+        $model = new SettingModel();
         $level = (!(session("app_user_level"))) ? "guest" : session("app_user_level");
         $id = (!(session("app_user_id"))) ? "guest" : session("app_user_id");
         $nama = (!(session("app_user_nama"))) ? "guest" : session("app_user_nama");
+        $namaLaundry = (!(session("app_laundry_nama"))) ? $model->ambilData("nama_laundry")["nilai_setting"] : session("app_laundry_nama");
+        $alamatLaundry = (!(session("app_laundry_alamat"))) ? $model->ambilData("alamat_laundry")["nilai_setting"] : session("app_laundry_alamat");
+        $session = [
+            "app_user_level" => $level,
+            "app_user_id" => $id,
+            "app_user_nama" => $nama,
+            "app_laundry_nama" => $namaLaundry,
+            "app_laundry_alamat" => $alamatLaundry,
+        ];
+
+        session()->set($session);
+
         if ($level !== "admin") {
             return redirect()->to("login")->with("pgagal", "Anda tidak dapat mengakses data ini silahkan login $level");
         }
