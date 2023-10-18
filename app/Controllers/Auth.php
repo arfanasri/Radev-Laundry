@@ -48,4 +48,10 @@ class Auth extends BaseController
         session()->set($session);
         return redirect()->to("login")->with("pberhasil", "Anda berhasil logout");
     }
+
+    public function destroy()
+    {
+        session()->destroy();
+        return redirect()->to("/");
+    }
 }
