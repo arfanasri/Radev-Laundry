@@ -10,7 +10,10 @@ $routes->get('/', 'Home::index');
 // Auth
 $routes->get("login", "Auth::login", ['as' => 'login']);
 $routes->get("logout", "Auth::logout", ['as' => 'logout']);
+$routes->get("logout/destroy", "Auth::destroy", ['as' => 'logout.destroy']);
 $routes->post("login", "Auth::loginproses", ['as' => 'loginproses']);
+$routes->get("setting", "Setting::index", ['as' => 'setting']);
+$routes->post("setting", "Setting::simpan", ['as' => 'setting.simpan']);
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
     // Layanan
