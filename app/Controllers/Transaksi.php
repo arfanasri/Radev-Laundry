@@ -21,11 +21,7 @@ class Transaksi extends Base
      */
     public function index(): string
     {
-        $model = new TransaksiModel();
-        $banyakData = $model->countAllResults();
-        $banyakHalaman = ceil($banyakData / 50);
-        $data = ["banyakHalaman" => $banyakHalaman];
-        return $this->tampil("transaksi/index", $data);
+        return $this->tampil("transaksi/index", []);
     }
 
     /**
@@ -66,18 +62,31 @@ class Transaksi extends Base
      * @param mixed $cari
      * @return string
      */
-    public function cari($cari): string
+    public function cari($cari, $laman, $tampil = 10): string
     {
         $model = new TransaksiModel();
-        $transaksi = $model
+        $query = $model
             ->like("transaksi.id_transaksi", $cari)
             ->orLike("pelanggan.nama_pelanggan", $cari)
             ->orLike("transaksi.tanggal_transaksi", $cari)
-            ->orLike("transaksi.harga_total", $cari)
-            ->ambilSemua();
+            ->orLike("transaksi.harga_total", $cari);
+
+        $banyakData = $query->countAllResults(false);
+        $banyakHalaman = ceil($banyakData / $tampil);
+
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+
+        $transaksi = $query->ambilSemua($limit, $offset);
 
         $data = [
+            "mode" => "cari",
+            "cari" => $cari,
             "transaksi" => $transaksi,
+            "halaman" => $laman,
+            "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('transaksi/data', $data);
@@ -90,17 +99,23 @@ class Transaksi extends Base
      * @param mixed $tampil Banyak data yang tampil
      * @return string
      */
-    public function halaman($laman, $tampil = 50): string
+    public function halaman($laman, $tampil = 10): string
     {
         $model = new TransaksiModel();
+
+        $banyakData = $model->countAllResults();
+        $banyakHalaman = ceil($banyakData / $tampil);
 
         $limit = $tampil;
         $offset = ($laman - 1) * $limit;
 
         $data = [
+            "mode" => "halaman",
             "transaksi" => $model->ambilSemua($limit, $offset),
             "halaman" => $laman,
             "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('transaksi/data', $data);

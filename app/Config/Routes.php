@@ -74,9 +74,8 @@ $routes->post("pelanggan/ubah/(:segment)", "Pelanggan::ubah/$1", ["as" => "pelan
 $routes->get("transaksi", "Transaksi::index", ["as" => "transaksi"]);
 $routes->get("transaksi/nota/(:segment)", "Transaksi::nota/$1", ["as" => "transaksi.nota"]);
 $routes->post("transaksi", "Transaksi::data", ["as" => "transaksi.data"]);
-$routes->post("transaksi/halaman/(:segment)/(:segment)", "Transaksi::halaman/$1/$2", ["as" => "transaksi.halaman.limit"]);
-$routes->post("transaksi/cari/(:segment)", "Transaksi::cari/$1", ["as" => "transaksi.cari"]);
-$routes->post("transaksi/halaman/(:segment)", "Transaksi::halaman/$1", ["as" => "transaksi.halaman"]);
+$routes->post("transaksi/cari/(:segment)/(:segment)/(:segment)", "Transaksi::cari/$1/$2/$3", ["as" => "transaksi.cari"]);
+$routes->post("transaksi/halaman/(:segment)/(:segment)", "Transaksi::halaman/$1/$2", ["as" => "transaksi.halaman"]);
 $routes->post("transaksi/tambah", "Transaksi::tambah", ["as" => "transaksi.tambah"]);
 
 // Pesanan
