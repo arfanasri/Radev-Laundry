@@ -87,11 +87,6 @@
     const modalElement = document.getElementById("modaltampil");
     const modal = new bootstrap.Modal(modalElement);
 
-    function gantiLimit(limitData) {
-        LIMIT = limitData;
-        perubahanData();
-    }
-
     function ready(callback) {
         if (document.readyState != 'loading') callback();
         else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
@@ -261,6 +256,14 @@
         }
 
         return dataForm;
+    }
+
+    function gantiLimit(limitData) {
+        kelipatan = LIMIT / limitData;
+        LIMIT = limitData;
+        HALAMAN_SEKARANG = Math.ceil(HALAMAN_SEKARANG * kelipatan);
+        console.log(HALAMAN_SEKARANG);
+        perubahanData();
     }
 
     ready(function () {
