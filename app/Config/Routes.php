@@ -14,6 +14,8 @@ $routes->get("logout/destroy", "Auth::destroy", ['as' => 'logout.destroy']);
 $routes->post("login", "Auth::loginproses", ['as' => 'loginproses']);
 $routes->get("setting", "Setting::index", ['as' => 'setting']);
 $routes->post("setting", "Setting::simpan", ['as' => 'setting.simpan']);
+$routes->get("akun", "Akun::index", ['as' => 'akun']);
+$routes->post("akun", "Akun::simpan", ['as' => 'akun.simpan']);
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
     // Layanan

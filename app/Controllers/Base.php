@@ -16,7 +16,7 @@ class Base extends BaseController
      * @param array $data
      * @return string
      */
-    protected function tampil(string $view, array $data): string
+    protected function tampil(string $view, array $data = []): string
     {
         $data["header"] = $this->header;
         $data["menu"] = $this->menu;
