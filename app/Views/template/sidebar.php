@@ -22,10 +22,6 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                 User
             </a>
-            <a class="nav-link <?= menu($menu, "setting") ?>" href="<?= url_to("setting") ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-gears"></i></div>
-                Setting
-            </a>
             <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
