@@ -57,17 +57,16 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
 // Layanan
 $routes->get("layanan", "Layanan::index", ["as" => "layanan"]);
 $routes->post("layanan", "Layanan::data", ["as" => "layanan.data"]);
-$routes->post("layanan/halaman/(:segment)/(:segment)", "Layanan::halaman/$1/$2", ["as" => "layanan.halaman.limit"]);
-$routes->post("layanan/cari/(:segment)/(:segment)/(:segment)", "Layanan::cari/$1/$2/$3", ["as" => "layanan.cari.limit"]);
+$routes->post("layanan/halaman/(:segment)/(:segment)", "Layanan::halaman/$1/$2", ["as" => "layanan.halaman"]);
+$routes->post("layanan/cari/(:segment)/(:segment)/(:segment)", "Layanan::cari/$1/$2/$3", ["as" => "layanan.cari"]);
 $routes->post("layanan/tambah", "Layanan::tambah", ["as" => "layanan.tambah"]);
 $routes->post("layanan/ubah/(:segment)", "Layanan::ubah/$1", ["as" => "layanan.ubah"]);
 
 // Pelanggan
 $routes->get("pelanggan", "Pelanggan::index", ["as" => "pelanggan"]);
 $routes->post("pelanggan", "Pelanggan::data", ["as" => "pelanggan.data"]);
-$routes->post("pelanggan/halaman/(:segment)/(:segment)", "Pelanggan::halaman/$1/$2", ["as" => "pelanggan.halaman.limit"]);
-$routes->post("pelanggan/cari/(:segment)", "Pelanggan::cari/$1", ["as" => "pelanggan.cari"]);
-$routes->post("pelanggan/halaman/(:segment)", "Pelanggan::halaman/$1", ["as" => "pelanggan.halaman"]);
+$routes->post("pelanggan/halaman/(:segment)/(:segment)", "Pelanggan::halaman/$1/$2", ["as" => "pelanggan.halaman"]);
+$routes->post("pelanggan/cari/(:segment)/(:segment)/(:segment)", "Pelanggan::cari/$1/$2/$3", ["as" => "pelanggan.cari"]);
 $routes->post("pelanggan/tambah", "Pelanggan::tambah", ["as" => "pelanggan.tambah"]);
 $routes->post("pelanggan/ubah/(:segment)", "Pelanggan::ubah/$1", ["as" => "pelanggan.ubah"]);
 
