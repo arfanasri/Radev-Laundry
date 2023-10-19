@@ -83,20 +83,11 @@
         </tbody>
     </table>
 </div>
-<nav class="d-flex justify-content-center">
-    <ul class="pagination">
-        <?php for ($i = 1; $i <= $banyakHalaman; $i++): ?>
-            <?php $tombol = $mode == "halaman" ? "dataTransaksi($i, $limit)" : "cariTransaksi('$cari', $i, $limit)"; ?>
-            <?php if ($i == $halaman): ?>
-                <li class="page-item active" onclick="<?= $tombol ?>"><button class="page-link">
-                        <?= $i ?>
-                    </button>
-                </li>
-            <?php else: ?>
-                <li class="page-item" onclick="<?= $tombol ?>"><button class="page-link">
-                        <?= $i ?>
-                    </button></li>
-            <?php endif ?>
-        <?php endfor ?>
-    </ul>
-</nav>
+<?= view_cell("NavigationCell", [
+    "banyakHalaman" => $banyakHalaman,
+    "halaman" => $halaman,
+    "mode" => $mode,
+    "cari" => (isset($cari)) ? $cari : "",
+    "limit" => $limit,
+    "namaTombol" => "Transaksi",
+]) ?>
