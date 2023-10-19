@@ -261,7 +261,6 @@
         kelipatan = LIMIT / limitData;
         LIMIT = limitData;
         HALAMAN_SEKARANG = Math.ceil(HALAMAN_SEKARANG * kelipatan);
-        console.log(HALAMAN_SEKARANG);
         perubahanData();
     }
 
