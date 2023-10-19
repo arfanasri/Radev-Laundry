@@ -58,8 +58,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
 $routes->get("layanan", "Layanan::index", ["as" => "layanan"]);
 $routes->post("layanan", "Layanan::data", ["as" => "layanan.data"]);
 $routes->post("layanan/halaman/(:segment)/(:segment)", "Layanan::halaman/$1/$2", ["as" => "layanan.halaman.limit"]);
-$routes->post("layanan/cari/(:segment)", "Layanan::cari/$1", ["as" => "layanan.cari"]);
-$routes->post("layanan/halaman/(:segment)", "Layanan::halaman/$1", ["as" => "layanan.halaman"]);
+$routes->post("layanan/cari/(:segment)/(:segment)/(:segment)", "Layanan::cari/$1/$2/$3", ["as" => "layanan.cari.limit"]);
 $routes->post("layanan/tambah", "Layanan::tambah", ["as" => "layanan.tambah"]);
 $routes->post("layanan/ubah/(:segment)", "Layanan::ubah/$1", ["as" => "layanan.ubah"]);
 

@@ -47,17 +47,32 @@ class Layanan extends Base
      * @param string $cari Teks yang ingin dicari
      * @return string
      */
-    public function cari(string $cari): string
+    public function cari(string $cari, int $laman, int $tampil = 5): string
     {
         $model = new LayananModel();
-        $layanan = $model
+
+        $query = $model
             ->like("nama_layanan", $cari)
             ->orLike("harga", $cari)
-            ->orLike("satuan", $cari)
-            ->ambilSemua();
+            ->orLike("satuan", $cari);
+
+
+        $banyakData = $query->countAllResults(false);
+        $banyakHalaman = ceil($banyakData / $tampil);
+
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+
+        $layanan = $query->ambilSemua($limit, $offset);
 
         $data = [
+            "mode" => "cari",
+            "cari" => $cari,
             "layanan" => $layanan,
+            "halaman" => $laman,
+            "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('layanan/data', $data);
@@ -70,17 +85,23 @@ class Layanan extends Base
      * @param int $tampil Berapa banyak yang tampil
      * @return string
      */
-    public function halaman(int $laman, int $tampil = 50): string
+    public function halaman(int $laman, int $tampil = 5): string
     {
         $model = new LayananModel();
+
+        $banyakData = $model->countAllResults();
+        $banyakHalaman = ceil($banyakData / $tampil);
 
         $limit = $tampil;
         $offset = ($laman - 1) * $limit;
 
         $data = [
+            "mode" => "halaman",
             "layanan" => $model->ambilSemua($limit, $offset),
             "halaman" => $laman,
             "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('layanan/data', $data);
