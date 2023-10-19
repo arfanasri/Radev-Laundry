@@ -12,7 +12,7 @@
         <?= session("app_laundry_nama") ?>
     </title>
     <link href="<?= base_url() ?>assets/css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/css/fontawesome-v6.4.2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css">
     <?= $this->renderSection("css") ?>
 </head>

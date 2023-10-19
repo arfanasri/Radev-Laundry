@@ -7,23 +7,23 @@
                 Beranda
             </a>
             <a class="nav-link <?= menu($menu, "layanan") ?>" href="<?= url_to("layanan") ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-shirt"></i></div>
                 Layanan
             </a>
             <a class="nav-link <?= menu($menu, "pelanggan") ?>" href="<?= url_to("pelanggan") ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
                 Pelanggan
             </a>
             <a class="nav-link <?= menu($menu, "transaksi") ?>" href="<?= url_to("transaksi") ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-cart-shopping"></i></div>
                 Transaksi
             </a>
             <a class="nav-link <?= menu($menu, "user") ?>" href="<?= url_to("user") ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                 User
             </a>
             <a class="nav-link <?= menu($menu, "setting") ?>" href="<?= url_to("setting") ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-gears"></i></div>
                 Setting
             </a>
             <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
