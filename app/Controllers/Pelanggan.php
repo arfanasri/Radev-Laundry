@@ -47,16 +47,31 @@ class Pelanggan extends Base
      * @param mixed $cari Kata kunci yang ingin dicari
      * @return string
      */
-    public function cari($cari): string
+    public function cari($cari, $laman, $tampil = 5): string
     {
         $model = new PelangganModel();
-        $pelanggan = $model
+
+        $query = $model
             ->like("nama_pelanggan", $cari)
-            ->orLike("alamat", $cari)
-            ->ambilSemua();
+            ->orLike("alamat", $cari);
+
+
+        $banyakData = $query->countAllResults(false);
+        $banyakHalaman = ceil($banyakData / $tampil);
+
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+
+        $pelanggan = $query->ambilSemua($limit, $offset);
 
         $data = [
+            "mode" => "cari",
+            "cari" => $cari,
             "pelanggan" => $pelanggan,
+            "halaman" => $laman,
+            "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('pelanggan/data', $data);
@@ -69,17 +84,23 @@ class Pelanggan extends Base
      * @param int $tampil Banyak data yang tampil
      * @return string
      */
-    public function halaman(int $laman, int $tampil = 50): string
+    public function halaman(int $laman, int $tampil = 5): string
     {
         $model = new PelangganModel();
+
+        $banyakData = $model->countAllResults();
+        $banyakHalaman = ceil($banyakData / $tampil);
 
         $limit = $tampil;
         $offset = ($laman - 1) * $limit;
 
         $data = [
+            "mode" => "halaman",
             "pelanggan" => $model->ambilSemua($limit, $offset),
             "halaman" => $laman,
             "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('pelanggan/data', $data);

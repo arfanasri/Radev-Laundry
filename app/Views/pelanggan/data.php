@@ -5,7 +5,7 @@
                 <th style="width: 0%;">#</th>
                 <th>Nama Pelanggan</th>
                 <th>Alamat</th>
-                <th>Aksi</th>
+                <th style="width: 0%">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -40,3 +40,20 @@
         </tbody>
     </table>
 </div>
+<nav class="d-flex justify-content-center">
+    <ul class="pagination">
+        <?php for ($i = 1; $i <= $banyakHalaman; $i++): ?>
+            <?php $tombol = $mode == "halaman" ? "dataPelanggan($i, $limit)" : "cariPelanggan('$cari', $i, $limit)"; ?>
+            <?php if ($i == $halaman): ?>
+                <li class="page-item active" onclick="<?= $tombol ?>"><button class="page-link">
+                        <?= $i ?>
+                    </button>
+                </li>
+            <?php else: ?>
+                <li class="page-item" onclick="<?= $tombol ?>"><button class="page-link">
+                        <?= $i ?>
+                    </button></li>
+            <?php endif ?>
+        <?php endfor ?>
+    </ul>
+</nav>

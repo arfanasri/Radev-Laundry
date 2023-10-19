@@ -4,8 +4,17 @@
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-md-8 pb-2">
+            <div class="col-md-6 pb-2">
                 Data Pelanggan
+            </div>
+            <div class="col-md-2 d-grid gap-2 pb-2">
+                <select class="form-control" id="pilihan_halaman" onchange="gantiLimit(this.value)">
+                    <option value="5">5 / Halaman</option>
+                    <option selected value="10">10 / Halaman</option>
+                    <option value="20">20 / Halaman</option>
+                    <option value="50">50 / Halaman</option>
+                    <option value="100">100 / Halaman</option>
+                </select>
             </div>
             <div class="col-md-2 d-grid gap-2 pb-2">
                 <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal"
@@ -31,25 +40,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-footer d-flex justify-content-center">
-        <nav>
-            <ul class="pagination">
-                <?php for ($i = 1; $i <= $banyakHalaman; $i++): ?>
-                    <?php if ($i == 1): ?>
-                        <li class="page-item active" onclick="dataPelanggan(<?= $i ?>);setAktif(event)"><button
-                                class="page-link">
-                                <?= $i ?>
-                            </button>
-                        </li>
-                    <?php else: ?>
-                        <li class="page-item" onclick="dataPelanggan(<?= $i ?>);setAktif(event)"><button class="page-link">
-                                <?= $i ?>
-                            </button></li>
-                    <?php endif ?>
-                <?php endfor ?>
-            </ul>
-        </nav>
     </div>
 </div>
 
@@ -92,6 +82,7 @@
     // Inisialisasi
     var HALAMAN_SEKARANG = 1;
     var DATA_SEKARANG = 1; // 1 : Halaman, 2 : Cari
+    var LIMIT = 10;
 
     const modalElement = document.getElementById("modaltampil");
     const modal = new bootstrap.Modal(modalElement);
@@ -104,9 +95,9 @@
         })
     };
 
-    async function dataPelanggan(halaman) {
+    async function dataPelanggan(halaman, limit = 10) {
         try {
-            const response = await axios.post('<?= site_url("pelanggan/halaman") ?>/' + halaman.toString());
+            const response = await axios.post('<?= site_url("pelanggan/halaman") ?>/' + halaman.toString() + '/' + limit.toString());
             document.querySelector("#tampildata").innerHTML = response.data;
             HALAMAN_SEKARANG = halaman;
             DATA_SEKARANG = 1;
@@ -115,14 +106,15 @@
         }
     }
 
-    async function cariPelanggan(cari) {
+    async function cariPelanggan(cari, halaman, limit = 10) {
         if (cari == "") {
-            dataPelanggan(1);
+            dataPelanggan(1, LIMIT);
             DATA_SEKARANG = 1;
         } else {
             try {
-                const response = await axios.post('<?= site_url("pelanggan/cari") ?>/' + cari.toString());
+                const response = await axios.post('<?= site_url("pelanggan/cari") ?>/' + cari.toString() + '/' + halaman.toString() + '/' + limit.toString());
                 document.querySelector("#tampildata").innerHTML = response.data;
+                HALAMAN_SEKARANG = halaman;
                 DATA_SEKARANG = 2;
             } catch (error) {
                 console.error(error);
@@ -235,21 +227,21 @@
         }
     }
 
-    function tombolCari() {
+    function tombolCari(halaman = 1) {
         const cari = document.querySelector("#cariData").value;
-        cariPelanggan(cari);
+        cariPelanggan(cari, halaman, LIMIT);
     }
 
     function tombolBersihCari() {
         document.querySelector("#cariData").value = "";
-        cariPelanggan("");
+        cariPelanggan("", halaman, LIMIT);
     }
 
     function perubahanData() {
         if (DATA_SEKARANG == 1) {
-            dataPelanggan(HALAMAN_SEKARANG);
+            dataPelanggan(HALAMAN_SEKARANG, LIMIT);
         } else if (DATA_SEKARANG == 2) {
-            tombolCari();
+            tombolCari(HALAMAN_SEKARANG);
         }
     }
 
@@ -265,8 +257,13 @@
         return dataForm;
     }
 
+    function gantiLimit(limitData) {
+        LIMIT = limitData;
+        perubahanData();
+    }
+
     ready(function () {
-        dataPelanggan(HALAMAN_SEKARANG);
+        dataPelanggan(HALAMAN_SEKARANG, LIMIT);
     })
 
     // Global Function yang akan dipindahkan dalam 1 file nanti
@@ -283,16 +280,6 @@
         document.querySelector('#tombolsimpan').setAttribute('onclick', onklik);
         document.querySelector('#tombolsimpan').removeAttribute('disable');
         document.querySelector('#tombolsimpan').innerHTML = 'Simpan';
-    }
-
-    function setAktif(e) {
-        const klass = document.getElementsByClassName(e.currentTarget.className);
-
-        for (i = 0; i < klass.length; i++) {
-            klass[i].setAttribute("class", "page-item");
-        }
-
-        e.currentTarget.setAttribute("class", "page-item active");
     }
 </script>
 <?= $this->endSection() ?>
