@@ -19,11 +19,7 @@ class Layanan extends Base
      */
     public function index(): string
     {
-        $model = new LayananModel();
-        $banyakData = $model->countAllResults();
-        $banyakHalaman = ceil($banyakData / 50);
-        $data = ["banyakHalaman" => $banyakHalaman];
-        return $this->tampil("layanan/index", $data);
+        return $this->tampil("layanan/index", []);
     }
 
     /**
