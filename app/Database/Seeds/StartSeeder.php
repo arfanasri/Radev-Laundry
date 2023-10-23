@@ -32,6 +32,7 @@ class StartSeeder extends Seeder
             "id_user" => "admin",
             "nama_user" => "Admin",
             "password" => "admin",
+            "role" => "superadmin",
         ];
 
         $userModel->tambahData($dataUser);
