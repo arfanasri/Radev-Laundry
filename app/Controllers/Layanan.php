@@ -19,7 +19,7 @@ class Layanan extends Base
      */
     public function index(): string
     {
-        return $this->tampil("layanan/index", []);
+        return $this->tampil("layanan/index");
     }
 
     /**
@@ -43,7 +43,7 @@ class Layanan extends Base
      * @param string $cari Teks yang ingin dicari
      * @return string
      */
-    public function cari(string $cari, int $laman, int $tampil = 5): string
+    public function cari(string $cari, int $laman, int $tampil = 10): string
     {
         $model = new LayananModel();
 
