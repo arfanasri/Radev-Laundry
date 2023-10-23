@@ -46,7 +46,7 @@ class AdminFilter implements FilterInterface
         if ($belumLogin) {
             return redirect()->to("login");
         }
-        if ($level !== "admin") {
+        if ($level === "guest") {
             return redirect()->to("login")->with("pgagal", "Anda tidak dapat mengakses data ini silahkan login $level");
         }
     }
