@@ -23,7 +23,7 @@ class UserMigration extends Migration
             ],
             'role' => [
                 'type' => 'ENUM',
-                'constraint' => ['admin'],
+                'constraint' => ['superadmin', 'admin'],
                 'default' => 'admin',
             ],
             'created_at' => [
