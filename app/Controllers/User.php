@@ -19,11 +19,7 @@ class User extends Base
      */
     public function index(): string
     {
-        $model = new UserModel();
-        $banyakData = $model->countAllResults();
-        $banyakHalaman = ceil($banyakData / 50);
-        $data = ["banyakHalaman" => $banyakHalaman];
-        return $this->tampil("user/index", $data);
+        return $this->tampil("user/index");
     }
 
     /**
@@ -47,16 +43,30 @@ class User extends Base
      * @param mixed $cari Kata kunci yang ingin dicari
      * @return string
      */
-    public function cari($cari): string
+    public function cari(string $cari, int $laman, int $tampil = 10): string
     {
         $model = new UserModel();
-        $user = $model
+
+        $query = $model
             ->like("id_user", $cari)
-            ->orLike("nama_user", $cari)
-            ->ambilSemua();
+            ->orLike("nama_user", $cari);
+
+        $banyakData = $query->countAllResults(false);
+        $banyakHalaman = ceil($banyakData / $tampil);
+
+        $limit = $tampil;
+        $offset = ($laman - 1) * $limit;
+
+        $user = $query->ambilSemua($limit, $offset);
 
         $data = [
+            "mode" => "cari",
+            "cari" => $cari,
             "user" => $user,
+            "halaman" => $laman,
+            "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('user/data', $data);
@@ -73,13 +83,19 @@ class User extends Base
     {
         $model = new UserModel();
 
+        $banyakData = $model->countAllResults();
+        $banyakHalaman = ceil($banyakData / $tampil);
+
         $limit = $tampil;
         $offset = ($laman - 1) * $limit;
 
         $data = [
+            "mode" => "halaman",
             "user" => $model->ambilSemua($limit, $offset),
             "halaman" => $laman,
             "offset" => $offset,
+            "limit" => $limit,
+            "banyakHalaman" => $banyakHalaman,
         ];
 
         $json = view('user/data', $data);

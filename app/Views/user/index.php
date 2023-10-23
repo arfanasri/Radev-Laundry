@@ -4,8 +4,17 @@
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-md-8 pb-2">
+            <div class="col-md-6 pb-2">
                 Data User
+            </div>
+            <div class="col-md-2 d-grid gap-2 pb-2">
+                <select class="form-control" id="pilihan_halaman" onchange="gantiLimit(this.value)">
+                    <option value="5">5 / Halaman</option>
+                    <option selected value="10">10 / Halaman</option>
+                    <option value="20">20 / Halaman</option>
+                    <option value="50">50 / Halaman</option>
+                    <option value="100">100 / Halaman</option>
+                </select>
             </div>
             <div class="col-md-2 d-grid gap-2 pb-2">
                 <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal"
@@ -31,24 +40,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-footer d-flex justify-content-center">
-        <nav>
-            <ul class="pagination">
-                <?php for ($i = 1; $i <= $banyakHalaman; $i++): ?>
-                    <?php if ($i == 1): ?>
-                        <li class="page-item active" onclick="dataUser(<?= $i ?>);setAktif(event)"><button class="page-link">
-                                <?= $i ?>
-                            </button>
-                        </li>
-                    <?php else: ?>
-                        <li class="page-item" onclick="dataUser(<?= $i ?>);setAktif(event)"><button class="page-link">
-                                <?= $i ?>
-                            </button></li>
-                    <?php endif ?>
-                <?php endfor ?>
-            </ul>
-        </nav>
     </div>
 </div>
 
@@ -91,6 +82,7 @@
     // Inisialisasi
     var HALAMAN_SEKARANG = 1;
     var DATA_SEKARANG = 1; // 1 : Halaman, 2 : Cari
+    var LIMIT = 10;
 
     const modalElement = document.getElementById("modaltampil");
     const modal = new bootstrap.Modal(modalElement);
@@ -103,9 +95,9 @@
         })
     };
 
-    async function dataUser(halaman) {
+    async function dataUser(halaman, limit = 10) {
         try {
-            const response = await axios.post('<?= site_url("user/halaman") ?>/' + halaman.toString());
+            const response = await axios.post('<?= site_url("user/halaman") ?>/' + halaman.toString() + '/' + limit.toString());
             document.querySelector("#tampildata").innerHTML = response.data;
             HALAMAN_SEKARANG = halaman;
             DATA_SEKARANG = 1;
@@ -114,14 +106,15 @@
         }
     }
 
-    async function cariUser(cari) {
+    async function cariUser(cari, halaman, limit = 10) {
         if (cari == "") {
-            dataUser(1);
+            dataUser(1, LIMIT);
             DATA_SEKARANG = 1;
         } else {
             try {
-                const response = await axios.post('<?= site_url("user/cari") ?>/' + cari.toString());
+                const response = await axios.post('<?= site_url("user/cari") ?>/' + cari.toString() + '/' + limit.toString());
                 document.querySelector("#tampildata").innerHTML = response.data;
+                HALAMAN_SEKARANG = halaman;
                 DATA_SEKARANG = 2;
             } catch (error) {
                 console.error(error);
@@ -234,21 +227,21 @@
         }
     }
 
-    function tombolCari() {
+    function tombolCari(halaman = 1) {
         const cari = document.querySelector("#cariData").value;
-        cariUser(cari);
+        cariUser(cari, halaman, LIMIT);
     }
 
     function tombolBersihCari() {
         document.querySelector("#cariData").value = "";
-        cariUser("");
+        cariUser("", halaman, LIMIT);
     }
 
     function perubahanData() {
         if (DATA_SEKARANG == 1) {
-            dataUser(HALAMAN_SEKARANG);
+            dataUser(HALAMAN_SEKARANG, LIMIT);
         } else if (DATA_SEKARANG == 2) {
-            tombolCari();
+            tombolCari(HALAMAN_SEKARANG);
         }
     }
 
@@ -264,6 +257,13 @@
         }
 
         return dataForm;
+    }
+
+    function gantiLimit(limitData) {
+        kelipatan = LIMIT / limitData;
+        LIMIT = limitData;
+        HALAMAN_SEKARANG = Math.ceil(HALAMAN_SEKARANG * kelipatan);
+        perubahanData();
     }
 
     ready(function () {

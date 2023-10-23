@@ -5,7 +5,7 @@
                 <th style="width: 0%;">#</th>
                 <th>ID User</th>
                 <th>Nama</th>
-                <th>Aksi</th>
+                <th style="width: 0%">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -40,3 +40,11 @@
         </tbody>
     </table>
 </div>
+<?= view_cell("NavigationCell", [
+    "banyakHalaman" => $banyakHalaman,
+    "halaman" => $halaman,
+    "mode" => $mode,
+    "cari" => (isset($cari)) ? $cari : "",
+    "limit" => $limit,
+    "namaTombol" => "User",
+]) ?>
