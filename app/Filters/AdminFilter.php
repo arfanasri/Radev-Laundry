@@ -27,6 +27,7 @@ class AdminFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $model = new SettingModel();
+        $belumLogin = (!(session("app_user_level"))) ? true : false;
         $level = (!(session("app_user_level"))) ? "guest" : session("app_user_level");
         $id = (!(session("app_user_id"))) ? "guest" : session("app_user_id");
         $nama = (!(session("app_user_nama"))) ? "guest" : session("app_user_nama");
@@ -42,6 +43,9 @@ class AdminFilter implements FilterInterface
 
         session()->set($session);
 
+        if ($belumLogin) {
+            return redirect()->to("login");
+        }
         if ($level !== "admin") {
             return redirect()->to("login")->with("pgagal", "Anda tidak dapat mengakses data ini silahkan login $level");
         }
