@@ -95,7 +95,7 @@
         })
     };
 
-    async function dataLayanan(halaman, limit = 50) {
+    async function dataLayanan(halaman, limit = 10) {
         try {
             const response = await axios.post('<?= site_url("layanan/halaman") ?>/' + halaman.toString() + '/' + limit.toString());
             document.querySelector("#tampildata").innerHTML = response.data;
