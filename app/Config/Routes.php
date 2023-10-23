@@ -97,12 +97,12 @@ $routes->post("pembayaran/tambah/(:segment)", "Pembayaran::tambah/$1", ["as" => 
 $routes->post("pembayaran/ubah/(:segment)", "Pembayaran::ubah/$1", ["as" => "pembayaran.ubah"]);
 
 // User
-$routes->get("user", "User::index", ["as" => "user"]);
-$routes->post("user", "User::data", ["as" => "user.data"]);
-$routes->post("user/halaman/(:segment)/(:segment)", "User::halaman/$1/$2", ["as" => "user.halaman.limit"]);
-$routes->post("user/cari/(:segment)", "User::cari/$1", ["as" => "user.cari"]);
-$routes->post("user/halaman/(:segment)", "User::halaman/$1", ["as" => "user.halaman"]);
-$routes->post("user/tambah", "User::tambah", ["as" => "user.tambah"]);
-$routes->post("user/ubah/(:segment)", "User::ubah/$1", ["as" => "user.ubah"]);
+$routes->get("user", "User::index", ["as" => "user", "filter" => "superadminfilter"]);
+$routes->post("user", "User::data", ["as" => "user.data", "filter" => "superadminfilter"]);
+$routes->post("user/halaman/(:segment)/(:segment)", "User::halaman/$1/$2", ["as" => "user.halaman.limit", "filter" => "superadminfilter"]);
+$routes->post("user/cari/(:segment)", "User::cari/$1", ["as" => "user.cari", "filter" => "superadminfilter"]);
+$routes->post("user/halaman/(:segment)", "User::halaman/$1", ["as" => "user.halaman", "filter" => "superadminfilter"]);
+$routes->post("user/tambah", "User::tambah", ["as" => "user.tambah", "filter" => "superadminfilter"]);
+$routes->post("user/ubah/(:segment)", "User::ubah/$1", ["as" => "user.ubah", "filter" => "superadminfilter"]);
 
 $routes->get("test", "Home::test");
