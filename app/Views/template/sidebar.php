@@ -18,10 +18,12 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-cart-shopping"></i></div>
                 Transaksi
             </a>
-            <a class="nav-link <?= menu($menu, "user") ?>" href="<?= url_to("user") ?>">
-                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                User
-            </a>
+            <?php if (session("app_user_level") === "superadmin"): ?>
+                <a class="nav-link <?= menu($menu, "user") ?>" href="<?= url_to("user") ?>">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    User
+                </a>
+            <?php endif ?>
             <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
