@@ -22,14 +22,14 @@
                         <?= $no++ ?>
                     </td>
                     <td>
-                        <?= $dt['nama_layanan'] ?>
+                        <?= $dt->nama_layanan ?>
                     </td>
                     <td>
-                        <?= $dt['harga'] ?>
+                        <?= $dt->harga ?>
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button onclick="tambahPesanan(<?= $dt['id_layanan'] ?>)" class="btn btn-primary btn-sm"
+                            <button onclick="tambahPesanan(<?= $dt->id_layanan ?>)" class="btn btn-primary btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modaltampil">Tambah</button>
                         </div>
                     </td>

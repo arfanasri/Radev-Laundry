@@ -25,56 +25,56 @@
                         <?= $no++ ?>
                     </td>
                     <td>
-                        <?= $dt['id_transaksi'] ?>
+                        <?= $dt->id_transaksi ?>
                     </td>
                     <td>
-                        <?= $dt['nama_pelanggan'] ?>
+                        <?= $dt->nama_pelanggan ?>
                     </td>
                     <td>
-                        <?= $dt['tanggal_transaksi'] ?>
+                        <?= $dt->tanggal_transaksi ?>
                     </td>
                     <td>
-                        <?= rupiah($dt['harga_total']) ?>
+                        <?= rupiah($dt->harga_total) ?>
                     </td>
                     <td>
-                        <?= normalkan($dt['status']) ?>
+                        <?= normalkan($dt->status) ?>
                     </td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-light btn-sm" target="_blank"
-                                href="<?= url_to("transaksi.nota", $dt["id_transaksi"]) ?>">Cetak</a>
-                            <?php if ($dt["status"] == "pencatatan"): ?>
+                                href="<?= url_to("transaksi.nota", $dt->id_transaksi) ?>">Cetak</a>
+                            <?php if ($dt->status == "pencatatan"): ?>
                                 <a class="btn btn-success btn-sm"
-                                    href="<?= url_to("pesanan", $dt["id_transaksi"]) ?>">Pesanan</a>
+                                    href="<?= url_to("pesanan", $dt->id_transaksi) ?>">Pesanan</a>
                             <?php endif ?>
-                            <?php if ($dt["status"] != "selesai"): ?>
+                            <?php if ($dt->status != "selesai"): ?>
                                 <a class="btn btn-info btn-sm"
-                                    href="<?= url_to("pembayaran", $dt["id_transaksi"]) ?>">Pembayaran</a>
+                                    href="<?= url_to("pembayaran", $dt->id_transaksi) ?>">Pembayaran</a>
                             <?php endif ?>
 
-                            <?php if ($dt["status"] == "pencatatan"): ?>
-                                <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'antrian')"
+                            <?php if ($dt->status == "pencatatan"): ?>
+                                <button onclick="konfirmasiStatus(<?= $dt->id_transaksi ?>,'antrian')"
                                     class="btn btn-primary btn-sm">Antrian</button>
-                            <?php elseif ($dt["status"] == 'antrian'): ?>
-                                <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'proses')"
+                            <?php elseif ($dt->status == 'antrian'): ?>
+                                <button onclick="konfirmasiStatus(<?= $dt->id_transaksi ?>,'proses')"
                                     class="btn btn-primary btn-sm">Proses</button>
-                            <?php elseif ($dt["status"] == 'proses'): ?>
-                                <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'siap_diambil')"
+                            <?php elseif ($dt->status == 'proses'): ?>
+                                <button onclick="konfirmasiStatus(<?= $dt->id_transaksi ?>,'siap_diambil')"
                                     class="btn btn-primary btn-sm">Siap diambil</button>
-                            <?php elseif ($dt["status"] == 'siap_diambil'): ?>
-                                <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'selesai')"
+                            <?php elseif ($dt->status == 'siap_diambil'): ?>
+                                <button onclick="konfirmasiStatus(<?= $dt->id_transaksi ?>,'selesai')"
                                     class="btn btn-primary btn-sm">Selesai</button>
                             <?php endif ?>
 
-                            <?php if ($dt["status"] == 'batal'): ?>
-                                <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'pencatatan')"
+                            <?php if ($dt->status == 'batal'): ?>
+                                <button onclick="konfirmasiStatus(<?= $dt->id_transaksi ?>,'pencatatan')"
                                     class="btn btn-warning btn-sm">Ulang</button>
                             <?php else: ?>
-                                <button onclick="konfirmasiStatus(<?= $dt['id_transaksi'] ?>,'batal')"
+                                <button onclick="konfirmasiStatus(<?= $dt->id_transaksi ?>,'batal')"
                                     class="btn btn-warning btn-sm">Batal</button>
                             <?php endif ?>
 
-                            <button onclick="konfirmasiHapus(<?= $dt['id_transaksi'] ?>)"
+                            <button onclick="konfirmasiHapus(<?= $dt->id_transaksi ?>)"
                                 class="btn btn-danger btn-sm">Hapus</button>
                         </div>
                     </td>

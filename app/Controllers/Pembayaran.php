@@ -55,7 +55,7 @@ class Pembayaran extends Base
         $model = new PembayaranModel();
 
         $transaksi = $transaksiModel->ambilData($idTransaksi);
-        $totalPembayaran = $transaksi["harga_total"];
+        $totalPembayaran = $transaksi->harga_total;
         $sudahBayar = $model->sudahBayar($idTransaksi);
         $sisaBayar = $totalPembayaran - $sudahBayar;
 
@@ -94,7 +94,7 @@ class Pembayaran extends Base
         $pembayaran = $model->ambilData($id);
         $data = [
             "data" => $pembayaran,
-            "idTransaksi" => $pembayaran["id_transaksi"],
+            "idTransaksi" => $pembayaran->id_transaksi,
         ];
         $json = view('pembayaran/ubah', $data);
         return $json;

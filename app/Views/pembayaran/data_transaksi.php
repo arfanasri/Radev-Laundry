@@ -3,25 +3,25 @@
         <tr>
             <th>ID Transaksi</th>
             <td>
-                <?= $transaksi["id_transaksi"] ?>
+                <?= $transaksi->id_transaksi ?>
             </td>
         </tr>
         <tr>
             <th>Tanggal Transaksi</th>
             <td>
-                <?= $transaksi["tanggal_transaksi"] ?>
+                <?= $transaksi->tanggal_transaksi ?>
             </td>
         </tr>
         <tr>
             <th>Nama Pelanggan</th>
             <td>
-                <?= $transaksi["nama_pelanggan"] ?>
+                <?= $transaksi->nama_pelanggan ?>
             </td>
         </tr>
         <tr>
             <th>Total Pembayaran</th>
             <td>
-                <?= $transaksi["harga_total"] ?>
+                <?= $transaksi->harga_total ?>
             </td>
         </tr>
         <tr>

@@ -23,19 +23,19 @@
                         <?= $no++ ?>
                     </td>
                     <td>
-                        <?= $dt['tanggal_pembayaran'] ?>
+                        <?= $dt->tanggal_pembayaran ?>
                     </td>
                     <td>
-                        <?= $dt['banyak'] ?>
+                        <?= $dt->banyak ?>
                     </td>
                     <td>
-                        <?= $dt['keterangan'] ?>
+                        <?= $dt->keterangan ?>
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button onclick="ubahPembayaran(<?= $dt['id_pembayaran'] ?>)" class="btn btn-info btn-sm"
+                            <button onclick="ubahPembayaran(<?= $dt->id_pembayaran ?>)" class="btn btn-info btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modaltampil">Ubah</button>
-                            <button onclick="konfirmasiHapus(<?= $dt['id_pembayaran'] ?>)"
+                            <button onclick="konfirmasiHapus(<?= $dt->id_pembayaran ?>)"
                                 class="btn btn-danger btn-sm">Hapus</button>
                         </div>
                     </td>

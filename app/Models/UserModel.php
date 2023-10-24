@@ -41,7 +41,7 @@ class UserModel extends BaseModel
     {
         $admin = $this->ambilData($id);
         if ($admin) {
-            return password_verify($pass, $admin['password']);
+            return password_verify($pass, $admin->password);
         } else {
             return false;
         }

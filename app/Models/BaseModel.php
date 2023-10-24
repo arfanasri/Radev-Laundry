@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class BaseModel extends Model
 {
     protected $DBGroup = 'default';
-    protected $returnType = 'array';
+    protected $returnType = 'object';
     protected $useSoftDeletes = true;
     protected $protectFields = true;
 

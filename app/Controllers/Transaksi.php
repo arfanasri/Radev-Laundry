@@ -146,7 +146,7 @@ class Transaksi extends Base
         if (count($pesanan) == 0) {
             return throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-        $pelanggan = $pelangganModel->ambilData($transaksi["id_pelanggan"]);
+        $pelanggan = $pelangganModel->ambilData($transaksi->id_pelanggan);
         $pdf = new \FPDF();
         $data = [
             "transaksi" => $transaksi,

@@ -130,7 +130,7 @@ class Pesanan extends Base
         $model = new PesananModel();
         $layananModel = new LayananModel();
         $pesanan = $model->ambilData($id);
-        $layanan = $layananModel->ambilData($pesanan["id_layanan"]);
+        $layanan = $layananModel->ambilData($pesanan->id_layanan);
         $data = [
             "data" => $pesanan,
             "layanan" => $layanan,

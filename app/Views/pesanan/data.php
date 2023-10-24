@@ -24,22 +24,22 @@
                         <?= $no++ ?>
                     </td>
                     <td>
-                        <?= $dt['nama_layanan'] ?>
+                        <?= $dt->nama_layanan ?>
                     </td>
                     <td>
-                        <?= $dt['banyak'] ?>
+                        <?= $dt->banyak ?>
                     </td>
                     <td>
-                        <?= $dt['harga'] ?>
+                        <?= $dt->harga ?>
                     </td>
                     <td>
-                        <?= $dt['harga_subtotal'] ?>
+                        <?= $dt->harga_subtotal ?>
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button onclick="ubahPesanan(<?= $dt['id_pesanan'] ?>)" class="btn btn-info btn-sm"
+                            <button onclick="ubahPesanan(<?= $dt->id_pesanan ?>)" class="btn btn-info btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modaltampil">Ubah</button>
-                            <button onclick="konfirmasiHapus(<?= $dt['id_pesanan'] ?>)"
+                            <button onclick="konfirmasiHapus(<?= $dt->id_pesanan ?>)"
                                 class="btn btn-danger btn-sm">Hapus</button>
                         </div>
                     </td>

@@ -21,8 +21,8 @@ class Setting extends Base
     {
         $model = new SettingModel();
         $data = [
-            "namaLaundry" => $model->ambilData("nama_laundry")["nilai_setting"],
-            "alamatLaundry" => $model->ambilData("alamat_laundry")["nilai_setting"],
+            "namaLaundry" => $model->ambilData("nama_laundry")->nilai_setting,
+            "alamatLaundry" => $model->ambilData("alamat_laundry")->nilai_setting,
         ];
         return $this->tampil("setting/index", $data);
     }

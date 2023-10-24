@@ -31,8 +31,8 @@ class AdminFilter implements FilterInterface
         $level = (!(session("app_user_level"))) ? "guest" : session("app_user_level");
         $id = (!(session("app_user_id"))) ? "guest" : session("app_user_id");
         $nama = (!(session("app_user_nama"))) ? "guest" : session("app_user_nama");
-        $namaLaundry = (!(session("app_laundry_nama"))) ? $model->ambilData("nama_laundry")["nilai_setting"] : session("app_laundry_nama");
-        $alamatLaundry = (!(session("app_laundry_alamat"))) ? $model->ambilData("alamat_laundry")["nilai_setting"] : session("app_laundry_alamat");
+        $namaLaundry = (!(session("app_laundry_nama"))) ? $model->ambilData("nama_laundry")->nilai_setting : session("app_laundry_nama");
+        $alamatLaundry = (!(session("app_laundry_alamat"))) ? $model->ambilData("alamat_laundry")->nilai_setting : session("app_laundry_alamat");
         $session = [
             "app_user_level" => $level,
             "app_user_id" => $id,

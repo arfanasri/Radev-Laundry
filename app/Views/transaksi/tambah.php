@@ -7,8 +7,8 @@
         <label for="id_pelanggan" class="form-label">Nama Pelanggan</label>
         <select class="form-control" id="id_pelanggan">
             <?php foreach ($pelanggan as $dt): ?>
-                <option value="<?= $dt["id_pelanggan"] ?>">
-                    <?= $dt["nama_pelanggan"] ?>
+                <option value="<?= $dt->id_pelanggan ?>">
+                    <?= $dt->nama_pelanggan ?>
                 </option>
             <?php endforeach ?>
         </select>
