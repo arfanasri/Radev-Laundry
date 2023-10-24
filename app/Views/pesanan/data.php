@@ -30,10 +30,10 @@
                         <?= $dt->banyak ?>
                     </td>
                     <td>
-                        <?= $dt->harga ?>
+                        <?= rupiah($dt->harga) ?>
                     </td>
                     <td>
-                        <?= $dt->harga_subtotal ?>
+                        <?= rupiah($dt->harga_subtotal) ?>
                     </td>
                     <td>
                         <div class="btn-group">

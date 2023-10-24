@@ -25,7 +25,7 @@
                         <?= $dt->nama_layanan ?>
                     </td>
                     <td>
-                        <?= $dt->harga ?>
+                        <?= rupiah($dt->harga) ?>
                     </td>
                     <td>
                         <div class="btn-group">

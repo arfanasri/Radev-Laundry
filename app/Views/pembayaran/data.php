@@ -26,7 +26,7 @@
                         <?= $dt->tanggal_pembayaran ?>
                     </td>
                     <td>
-                        <?= $dt->banyak ?>
+                        <?= rupiah($dt->banyak) ?>
                     </td>
                     <td>
                         <?= $dt->keterangan ?>

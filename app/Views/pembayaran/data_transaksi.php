@@ -21,19 +21,19 @@
         <tr>
             <th>Total Pembayaran</th>
             <td>
-                <?= $transaksi->harga_total ?>
+                <?= rupiah($transaksi->harga_total) ?>
             </td>
         </tr>
         <tr>
             <th>Sudah Bayar</th>
             <td>
-                <?= $sudahBayar ?>
+                <?= rupiah($sudahBayar) ?>
             </td>
         </tr>
         <tr>
             <th>Sisa Bayar</th>
             <td>
-                <?= $sisaBayar ?>
+                <?= rupiah($sisaBayar) ?>
             </td>
         </tr>
     </tbody>
