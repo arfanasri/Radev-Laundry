@@ -26,6 +26,6 @@ class PembayaranModel extends BaseModel
     public function sudahBayar($idTransaksi)
     {
         $transaksi = $this->selectSum("banyak", "sudah_bayar")->where("id_transaksi", $idTransaksi)->first();
-        return $transaksi["sudah_bayar"];
+        return $transaksi->sudah_bayar;
     }
 }

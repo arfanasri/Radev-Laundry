@@ -48,7 +48,7 @@ class PesananModel extends BaseModel
         $semuaPesanan = $this->where("id_transaksi", $idTransaksi)->ambilSemua();
         $total = $data["harga_subtotal"];
         foreach ($semuaPesanan as $dt) {
-            $total += $dt["harga_subtotal"];
+            $total += $dt->harga_subtotal;
         }
         $transaksiModel = new TransaksiModel();
         $dataTransaksi = [
@@ -65,8 +65,8 @@ class PesananModel extends BaseModel
         $semuaPesanan = $this->where("id_transaksi", $idTransaksi)->ambilSemua();
         $total = $data["harga_subtotal"];
         foreach ($semuaPesanan as $dt) {
-            if ($dt["id_pesanan"] != $id) {
-                $total += $dt["harga_subtotal"];
+            if ($dt->id_pesanan != $id) {
+                $total += $dt->harga_subtotal;
             }
         }
         $transaksiModel = new TransaksiModel();
@@ -81,10 +81,10 @@ class PesananModel extends BaseModel
     {
         $pesanan = $this->ambilData($id);
         $transaksiModel = new TransaksiModel();
-        $idTransaksi = $pesanan["id_transaksi"];
+        $idTransaksi = $pesanan->id_transaksi;
         $transaksi = $transaksiModel->ambilData($idTransaksi);
         $dataTransaksi = [
-            "harga_total" => $transaksi["harga_total"] - $pesanan["harga_subtotal"],
+            "harga_total" => $transaksi->harga_total - $pesanan->harga_subtotal,
         ];
         $transaksiModel->ubahData($idTransaksi, $dataTransaksi);
         return $this->delete($id, $purge);
