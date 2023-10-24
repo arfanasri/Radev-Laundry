@@ -127,7 +127,7 @@ class StartSeeder extends Seeder
         $dataTransaksi = [];
         for ($i = 0; $i < $banyakTransaksi; $i++) {
             $faker = \Faker\Factory::create("id_ID");
-            $tanggal = $faker->dateTimeBetween("-1 year");
+            $tanggal = $faker->dateTimeBetween("-3 months");
             $dataTransaksi[] = [
                 "tanggal_transaksi" => $tanggal->format("Y-m-d H:i:s"),
                 "id_pelanggan" => $faker->numberBetween(1, $banyakPelanggan),
