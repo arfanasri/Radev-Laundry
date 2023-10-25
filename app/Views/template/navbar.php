@@ -15,7 +15,9 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="<?= url_to("setting") ?>">Settings</a></li>
+                <?php if (session("app_user_level" == "superadmin")): ?>
+                    <li><a class="dropdown-item" href="<?= url_to("setting") ?>">Settings</a></li>
+                <?php endif ?>
                 <li><a class="dropdown-item" href="<?= url_to("akun") ?>">Akun</a></li>
                 <li>
                     <hr class="dropdown-divider" />
