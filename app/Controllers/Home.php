@@ -54,8 +54,8 @@ class Home extends Base
             "app_beranda_banyak_layanan" => $banyakLayanan,
             "app_beranda_banyak_pelanggan" => $banyakPelanggan,
             "app_beranda_banyak_transaksi" => $banyakTransaksi,
-            "app_beranda_banyak_transaksi_harian_tanggal" => $transaksiHarianTanggal,
-            "app_beranda_banyak_transaksi_harian_banyak" => $transaksiHarianBanyak,
+            "app_beranda_banyak_transaksi_harian_tanggal" => array_reverse($transaksiHarianTanggal),
+            "app_beranda_banyak_transaksi_harian_banyak" => array_reverse($transaksiHarianBanyak),
         ];
 
         session()->set($session);
